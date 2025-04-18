@@ -1,0 +1,411 @@
+﻿@using DevExpress.Blazor
+@using DevExpress.Data.Linq
+@using DevExpress.Xpo
+@using DevExpress.Xpo.DB
+@using DevExpress.Xpo.Metadata
+@using System.Reflection
+@using System.ComponentModel.DataAnnotations.Schema
+@using System.Data.Common
+@using System.Dynamic
+@using System.Data
+@using System.Data.SqlClient
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.JSInterop
+@using Npgsql
+@using System.Diagnostics.CodeAnalysis
+@using System.Collections
+@using System.Linq.Expressions
+@using System.ComponentModel
+@using System.Globalization
+@using Roche.Common
+@using iData.Dp.CompGov.Editors
+@using iData.Dp.CompGov.Entities
+@using iData.Dp.CompGov.Service
+@using DevExpress.ExpressApp.Blazor.Editors
+
+@implements IDisposable
+
+@inject IServiceProvider ServiceProvider
+@inject RedshiftService RedShiftService
+@inject IJSRuntime jsRuntime
+
+@if (Error != null)
+{
+    <p>An unexpected error occured:</p>
+    <pre>@Error</pre>
+}
+else
+{
+    <div style="margin: -12px; width: calc(100% + 24px);">
+        @* style to offset the default padding for tabs *@
+
+        <DxLoadingPanel @bind-Visible="LoadingPanelVisible"
+                        IsContentBlocked="true"
+                        ApplyBackgroundShading="true"
+                        Text="Loading data from Redshift (can take up to a minute)">
+
+            <DxGrid @ref="Grid"
+                    Data="@DataSource"
+                    AllowSort="false"
+                    ShowFilterRow="false"
+                    SelectAllCheckboxMode="GridSelectAllCheckboxMode.Page"
+                    SelectionMode="GridSelectionMode.Multiple"
+                    AllowSelectRowByClick="false"
+                    FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                    TextWrapEnabled="false"
+                    HighlightRowOnHover="true"
+                    FocusedRowEnabled="true"
+                    PageSize="15">
+                <ToolbarTemplate>
+                    <DxToolbar ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+                        <Items>
+                            <DxToolbarItem Alignment="ToolbarItemAlignment.Right" Text="Column Chooser"
+                                           RenderStyle="ButtonRenderStyle.Secondary"
+                                           CssClass="dxbl-toolbar-btn dxbl-btn-secondary"
+                                           IconUrl="/IImageService/Action_ColumnChooser"
+                                           Click="ColumnChooserButton_Click" />
+                        </Items>
+                    </DxToolbar>
+                </ToolbarTemplate>
+                <Columns>
+                    @* <DxGridSelectionColumn FixedPosition="GridColumnFixedPosition.Left" Width="40px" ShowInColumnChooser="false" /> *@
+
+                    @{
+                        var idx = 0;
+                    }
+                    @if (ClassInfo != null)
+                    {
+                        @foreach (XPMemberInfo col in ClassInfo.PersistentProperties)
+                        {
+                            @if (col.Name == "xafkey")
+                            {
+                                <DxGridDataColumn FieldName="@(col.Name)" ShowInColumnChooser="false" Visible="false"></DxGridDataColumn>
+                            }
+                            else
+                            {
+                                <DxGridDataColumn FieldName="@(col.Name)" Visible="@(idx++ < 10)" DisplayFormat="@(Column_DisplayFormat(col.MemberType))"></DxGridDataColumn>
+                            }
+
+                        }
+                    }
+                </Columns>
+            </DxGrid>
+        </DxLoadingPanel>
+    </div>
+}
+
+@code {
+    @* triplet of variables is required by Blazor *@
+    [Parameter] public string Value { get; set; }
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public Expression<Func<string>> ValueExpression { get; set; }
+
+    string CurrentValue;
+    bool LoadingPanelVisible { get; set; }
+    IGrid Grid { get; set; }
+    IListSource DataSource { get; set; }
+    string connectionString { get; set; }
+    string SelectedTable { get; set; }
+    XPClassInfo ClassInfo { get; set; }
+    string Error { get; set; }
+
+    private NpgsqlConnection connection;
+    private PostgreSqlConnectionProvider connectionProvider;
+    private Session workSession;
+
+    void ColumnChooserButton_Click()
+    {
+        Grid.ShowColumnChooser();
+    }
+
+    Dictionary<Type, string> formats = new Dictionary<Type, string>
+    {
+        { typeof(DateTime), "{0:F}" },
+        { typeof(int), "{0:G}" },
+        { typeof(float), "{0:G}" },
+        { typeof(double), "{0:G}" },
+    };
+    string Column_DisplayFormat(Type type)
+    {
+        if (IsNumericType(type))
+        {
+            return "{0:0.#########}";
+        }
+        if (type == typeof(DateTime))
+        {
+            var dt = CultureHelper.GetCulture().DateTimeFormat.FullDateTimePattern;
+            return $"{{0:{dt}}}";
+        }
+        return "{0}";
+    }
+    public static bool IsNumericType(Type type)
+    {
+        switch (Type.GetTypeCode(type))
+        {
+            case TypeCode.Byte:
+            case TypeCode.SByte:
+            case TypeCode.UInt16:
+            case TypeCode.UInt32:
+            case TypeCode.UInt64:
+            case TypeCode.Int16:
+            case TypeCode.Int32:
+            case TypeCode.Int64:
+            case TypeCode.Decimal:
+            case TypeCode.Double:
+            case TypeCode.Single:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+        if (Value != CurrentValue)
+        {
+            CurrentValue = Value;
+            await TableChanged();
+        }
+    }
+    protected async Task TableChanged()
+    {
+        try
+        {
+            if (Value == null)
+            {
+                return;
+            }
+
+            LoadingPanelVisible = true;
+            StateHasChanged();
+
+            connectionString = await RedShiftService.GetConnectionString();
+            connection = new NpgsqlConnection(connectionString + ";Server Compatibility Mode=Redshift");
+
+            connectionProvider = new PostgreSqlConnectionProvider(connection, AutoCreateOption.None);
+            IDataLayer dal = new SimpleDataLayer(connectionProvider);
+            workSession = new Session(dal);
+            var schema = RedShiftService.RedshiftConfig?.Schema;
+            var table = Value;
+            var parts = Value.Split(".");
+            if (parts.Length == 2)
+            {
+                schema = parts[0];
+                table = parts[1];
+            }
+            // var searchpath = new NpgsqlCommand($"SET search_path = '{schema}';", connection);
+            // searchpath.ExecuteNonQuery();
+
+            ClassInfo = CreateXPClassInfo(schema, table);
+
+            var ds = new XPInstantFeedbackView(ClassInfo);
+            ds.ResolveSession += (s, e) =>
+            {
+                e.Session = workSession;
+            };
+
+            // use for debugging
+            // var ds = new XPServerCollectionSource(workSession, ClassInfo);
+            // ds.ServerExceptionThrown += ServerExceptionThrownHandler;
+
+            DataSource = ds;
+            Grid.AutoFitColumnWidths();
+            LoadingPanelVisible = false;
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Error = e.ToString();
+            StateHasChanged();
+        }
+    }
+
+    void ServerExceptionThrownHandler(object sender, ServerExceptionThrownEventArgs e)
+    {
+        Error = e.Exception.ToString();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        (DataSource as IDisposable)?.Dispose();
+        workSession?.Dispose();
+        connection?.Dispose();
+    }
+
+    protected XPClassInfo CreateXPClassInfo(string schema, string tableName)
+    {
+        DataTable dataTable = new DataTable(tableName, schema);
+        var adapter = new NpgsqlDataAdapter($"SELECT column_name, data_type FROM svv_columns sc where sc.table_catalog='{connection.Database}' and sc.table_schema = '{schema}' and sc.table_name = '{tableName}';", connection);
+        adapter.Fill(dataTable);
+        var info = new DynamicDataTableClassInfo(workSession.Dictionary, dataTable, schema + "." + tableName);
+        return info;
+    }
+
+    public class DynamicDataTableClassInfo : XPClassInfo
+    {
+        public Type? dbTypeMapping(string type)
+        {
+            return type switch
+            {
+                "integer" => typeof(int),
+                "bigint" => typeof(Int64),
+                "numeric" => typeof(decimal),
+                "boolean" => typeof(bool),
+                "character" => typeof(string),
+                "character varying" => typeof(string),
+                "text" => typeof(string),
+                "string" => typeof(string),
+                "date" => typeof(DateTime), // typeof(DateOnly),
+                "time" => typeof(DateTime), // typeof(TimeOnly),
+                "timestamp" => typeof(DateTime),
+                "real" => typeof(Single),
+                "smallint" => typeof(Int16),
+                _ => null,
+            };
+        }
+        private readonly IList<XPMemberInfo> ownMembersCore = new List<XPMemberInfo>();
+        private readonly string tableNameCore;
+        private readonly XPClassInfo baseClassCore;
+        public DynamicDataTableClassInfo(XPDictionary dictionary, DataTable table, string tableName)
+            : base(dictionary)
+        {
+            baseClassCore = dictionary.QueryClassInfo(typeof(XPDataTableObject));
+            tableNameCore = tableName;
+
+            XPComplexCustomMemberInfo key = new XPComplexCustomMemberInfo(this, "xafkey", typeof(object), new KeyAttribute());
+
+            foreach (DataRow row in table.Rows)
+            {
+                var colName = row["column_name"]?.ToString();
+                var dbtype = dbTypeMapping(row["data_type"]?.ToString());
+                if (dbtype != null)
+                {
+                    XPCustomMemberInfo member = CreateMember(colName, dbtype);
+                    member.AddAttribute(new PersistentAttribute(colName));
+                    member.AddAttribute(new DevExpress.Xpo.DisplayNameAttribute(colName));
+
+                    key.AddSubMember(colName, dbtype, new PersistentAttribute(colName));
+                }
+            }
+            dictionary.AddClassInfo(this);
+        }
+        public override bool CanGetByClassType => false;
+        public override string AssemblyName => GetType().Assembly.FullName;
+        public override XPClassInfo BaseClass => baseClassCore;
+        public override Type ClassType => BaseClass.ClassType;
+        protected override object CreateObjectInstance(Session session, XPClassInfo instantiationClassInfo)
+        {
+            return new XPDataTableObject(session, instantiationClassInfo);
+        }
+        public override string FullName => tableNameCore;
+        protected override string GetTableName() => tableNameCore;
+
+        public override ICollection<XPMemberInfo> OwnMembers => ownMembersCore;
+        public override void AddMember(XPMemberInfo newMember)
+        {
+            ownMembersCore.Add(newMember);
+            base.AddMember(newMember);
+        }
+        public override bool HasModifications(object theObject)
+        {
+            return PersistentBase.GetModificationsStore(theObject).HasModifications();
+        }
+        public override void ClearModifications(object theObject)
+        {
+            PersistentBase.GetModificationsStore(theObject).ClearModifications();
+        }
+        protected override bool CanPersist => true;
+    }
+    public class XPComplexCustomMemberInfo : XPCustomMemberInfo
+    {
+        // https://supportcenter.devexpress.com/ticket/details/e4606/how-to-create-persistent-classes-mapped-to-tables-with-a-composite-primary-key-at-runtime
+        public XPComplexCustomMemberInfo(XPClassInfo owner, string propertyName, Type propertyType, params Attribute[] attributes)
+            : this(owner, propertyName, propertyType, null, false, false, attributes) { }
+        public XPComplexCustomMemberInfo(XPClassInfo owner, string propertyName, XPClassInfo referenceType, params Attribute[] attributes)
+            : this(owner, propertyName, null, referenceType, false, false, attributes) { }
+        public XPComplexCustomMemberInfo(XPClassInfo owner, string propertyName, Type propertyType, XPClassInfo referenceType, bool nonPersistent, bool nonPublic, params Attribute[] attributes)
+            : base(owner, propertyName, propertyType, referenceType, nonPersistent, nonPublic)
+        {
+            if (Equals(this.subMembersArray, XPMemberInfo.EmptyList))
+            {
+                this.subMembersArray = new List<XPMemberInfo>();
+            }
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                Attribute attribute = attributes[i];
+                this.AddAttribute(attribute);
+            }
+        }
+        public override bool IsStruct { get { return this.SubMembers.Count > 0; } }
+        public void AddSubMember(XPComplexCustomMemberInfo memeberInfo)
+        {
+            this.SubMembers.Add(memeberInfo);
+            memeberInfo.valueParent = this;
+        }
+        public XPComplexCustomMemberInfo AddSubMember(string propertyName, Type propertyType, params Attribute[] attributes)
+        {
+            XPComplexCustomMemberInfo memeberInfo = new XPComplexCustomMemberInfo(this.Owner, propertyName, propertyType, attributes);
+            AddSubMember(memeberInfo);
+            return memeberInfo;
+        }
+        public XPComplexCustomMemberInfo AddSubMember(string propertyName, XPClassInfo referenceType, params Attribute[] attributes)
+        {
+            XPComplexCustomMemberInfo memeberInfo = new XPComplexCustomMemberInfo(this.Owner, propertyName, referenceType, attributes);
+            AddSubMember(memeberInfo);
+            return memeberInfo;
+        }
+        public override string Name
+        {
+            get
+            {
+                if (valueParent == null) return base.Name;
+                return string.Concat(this.valueParent.Name, '.', base.Name);
+            }
+        }
+        protected override string GetDefaultMappingField()
+        {
+            if (this.valueParent == null) return base.Name;
+            return this.valueParent.MappingField + base.Name;
+        }
+        public override object GetValue(object theObject)
+        {
+            if (IsStruct)
+            {
+                DevExpress.Xpo.Helpers.IdList idList = new DevExpress.Xpo.Helpers.IdList();
+                foreach (XPMemberInfo memberInfo in this.SubMembers)
+                {
+                    if (memberInfo.IsPersistent)
+                    {
+                        idList.Add(memberInfo.GetValue(theObject));
+                    }
+                }
+                return idList;
+            }
+            return base.GetValue(theObject);
+        }
+        public override void SetValue(object theObject, object theValue)
+        {
+            if (IsStruct)
+            {
+                IList list = theValue as IList;
+                if (list != null)
+                {
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        XPMemberInfo memberInfo = (XPMemberInfo)this.SubMembers[i];
+                        if (memberInfo.IsPersistent)
+                        {
+                            memberInfo.SetValue(theObject, list[i]);
+                        }
+                    }
+                }
+                return;
+            }
+            base.SetValue(theObject, theValue);
+        }
+    }
+
+}

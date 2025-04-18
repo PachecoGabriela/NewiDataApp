@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Configurations>Debug;Release;EasyTest</Configurations>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="DP_Mock.json" />
+    <None Remove="Editors\Redshift.razor" />
+    <None Remove="Images\Calendar.svg" />
+    <None Remove="Images\DataElement.svg" />
+    <None Remove="Images\DataProduct.svg" />
+    <None Remove="Images\Device.svg" />
+    <None Remove="Images\Endpoint.svg" />
+    <None Remove="Images\Grant.svg" />
+    <None Remove="Images\UseCase.svg" />
+    <None Remove="Model.DesignedDiffs.xafml" />
+    <None Remove="Terraform\MainTemplate.scriban" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DP_Mock.json" />
+    <EmbeddedResource Include="Images\Calendar.svg" />
+    <EmbeddedResource Include="Images\DataElement.svg" />
+    <EmbeddedResource Include="Images\DataProduct.svg" />
+    <EmbeddedResource Include="Images\Device.svg" />
+    <EmbeddedResource Include="Images\Endpoint.svg" />
+    <EmbeddedResource Include="Images\Grant.svg" />
+    <EmbeddedResource Include="Images\UseCase.svg" />
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Terraform\MainTemplate.scriban" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Redshift" Version="3.7.305.38" />
+    <PackageReference Include="AWSSDK.RedshiftDataAPIService" Version="3.7.300.112" />
+    <PackageReference Include="AWSSDK.RedshiftServerless" Version="3.7.400.32" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.310.5" />
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.400.32" />
+    <PackageReference Include="BasicSQLFormatter" Version="1.0.3" />
+    <PackageReference Include="DevExpress.ExpressApp" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Blazor.All" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.Base" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="24.1.6" />
+    <PackageReference Include="Npgsql" Version="8.0.5" />
+    <PackageReference Include="Scriban" Version="5.10.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Roche.Common.Workflow\Roche.Common.Workflow.csproj" />
+    <ProjectReference Include="..\Roche.Common\Roche.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Terraform\backend.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Terraform\modules\cognito_identity_pool\main.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Terraform\modules\cognito_identity_pool\outputs.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Terraform\modules\cognito_identity_pool\variables.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Terraform\modules\iam\main.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Terraform\modules\iam\outputs.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Terraform\modules\iam\variables.tf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Terraform\modules\iam\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="SaveAndClose" TargetObjectsCriteria="1=2" />
+    </Actions>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="Roche.Common.AuditTrail.AuditDataItemPersistentUTC" ImageName="" />
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Administration" Caption="Administration" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="@88f88368-fb0e-4e1f-b896-e7b2d7406295" ViewId="PermissionPolicyUser_ListView" IsNewNode="True" />
+          <Item Id="@d48eeea1-8b28-4cfd-96bd-325bb57e9842" ViewId="PermissionPolicyUser_Roles_ListView" Caption="Roles" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="24.1.3.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="24.1.3.0" IsNewNode="True" />
+  </SchemaModules>
+</Application>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel>
+    <Class Name="iData.AsapsPipeline.Entities.DpActivatedAsap" ImageName="ASAP" IsVisibleInDashboards="True">
+      <OwnMembers>
+        <Member Name="AsapAssay" ToolTip="test" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="DP - Activated ASAPs" Caption="DP - Activated ASAPs" Index="1" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Currently Activated ASAPs" Caption="Currently Activated ASAPs" ViewId="DpActivatedAsap_ListView_CurrentSnapshots" Index="0" IsNewNode="True" />
+          <Item Id="ASAPs Activation History" Index="1" Caption="ASAPs Activation History" ViewId="DpActivatedAsap_ListView_HistoryTracker" IsNewNode="True" />
+          <DashboardNavigationItem Id="Respiratory Flex Adoption" Caption="Respiratory Flex Adoption" DashboardTitle="Respiratory Flex Adoption" ImageName="Dashboard" Index="2" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Reports" Visible="False" />
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="24.1.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="DpActivatedAsap_DetailView" AllowDelete="False" AllowEdit="False" AllowNew="False" FreezeLayout="True">
+      <Layout IsNewNode="True" Removed="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="DpActivatedAsap" Index="0" Direction="Horizontal" ShowCaption="False" Caption="Activated ASAP Record" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="DpActivatedAsap_col1" ShowCaption="False" Direction="Horizontal" Index="0" RelativeSize="66.44113667117726" IsNewNode="True">
+                <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="50.509164969450104" Caption="Device Information" IsNewNode="True">
+                  <LayoutItem Id="DeviceReferenceSystemType" ViewItem="DeviceReferenceSystemType" Index="0" RelativeSize="4.426002766251729" IsNewNode="True" />
+                  <LayoutItem Id="DeviceSerialNo" ViewItem="DeviceSerialNo" Index="1" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceLocation" ViewItem="DeviceLocation" Index="2" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceLocationCountryCode" ViewItem="DeviceLocationCountryCode" Index="3" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceLocationAccountName" ViewItem="DeviceLocationAccountName" Index="4" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceLocationAccountNumber" ViewItem="DeviceLocationAccountNumber" Index="5" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceMaterialNumber" ViewItem="DeviceMaterialNumber" Index="6" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceMaterialName" ViewItem="DeviceMaterialName" Index="7" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceShipToAccountNumber" ViewItem="DeviceShipToAccountNumber" Index="8" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceSoldToAccountNumber" ViewItem="DeviceSoldToAccountNumber" Index="9" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="DeviceBillToAccountNumber" ViewItem="DeviceBillToAccountNumber" Index="10" RelativeSize="65.6984785615491" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Item1" ShowCaption="True" Caption="ASAP Information" CaptionLocation="Top" Index="1" RelativeSize="49.490835030549896" IsNewNode="True">
+                  <LayoutItem Id="AsapLifeCycleTeam" ViewItem="AsapLifeCycleTeam" Index="0" RelativeSize="4.426002766251729" IsNewNode="True" />
+                  <LayoutItem Id="AsapAssay" ViewItem="AsapAssay" Index="1" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapSoftwareName" ViewItem="AsapSoftwareName" Index="2" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapTechnicalName" ViewItem="AsapTechnicalName" Index="3" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapVersion" ViewItem="AsapVersion" Index="4" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapMaterialNameMedium" ViewItem="AsapMaterialNameMedium" Index="5" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapMaterialNumber" ViewItem="AsapMaterialNumber" Index="6" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapMaterialNameLong" ViewItem="AsapMaterialNameLong" Index="7" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapLoincCode" ViewItem="AsapLoincCode" Index="8" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapUsi" ViewItem="AsapUsi" Index="9" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="AsapGtin" ViewItem="AsapGtin" Index="10" RelativeSize="65.6984785615491" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="DpActivatedAsap_col2" ShowCaption="False" Index="1" RelativeSize="33.55886332882273" IsNewNode="True">
+                <LayoutGroup Id="Item3" ShowCaption="True" Caption="Installation Status Snaphot" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
+                  <LayoutItem Id="SnapshotDate" ViewItem="SnapshotDate" Index="0" RelativeSize="4.426002766251729" IsNewNode="True" />
+                  <LayoutItem Id="IsMostCurrentSnapshot" ViewItem="IsMostCurrentSnapshot" Index="1" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="IsActivated" ViewItem="IsActivated" Index="2" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="WasNewlyActivated" ViewItem="WasNewlyActivated" Index="3" RelativeSize="3.319502074688797" IsNewNode="True" />
+                  <LayoutItem Id="WasDeactivated" ViewItem="WasDeactivated" Index="4" RelativeSize="85.61549100968188" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DpActivatedAsap_ListView" EditorTypeName="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor" DataAccessMode="Server" AllowDelete="False" AllowLink="False" ShowAutoFilterRow="True" ShowSelectionColumn="False" AllowNew="False">
+      <Columns>
+        <ColumnInfo Id="AsapGtin" Index="-1" />
+        <ColumnInfo Id="AsapLoincCode" Index="-1" />
+        <ColumnInfo Id="AsapMaterialNameLong" Index="-1" />
+        <ColumnInfo Id="AsapMaterialNameMedium" Index="-1" />
+        <ColumnInfo Id="AsapMaterialNumber" Index="-1" />
+        <ColumnInfo Id="AsapSoftwareName" Index="-1" />
+        <ColumnInfo Id="AsapTechnicalName" Index="-1" />
+        <ColumnInfo Id="AsapUsi" Index="-1" />
+        <ColumnInfo Id="AsapVersion" Index="-1" Width="143" />
+        <ColumnInfo Id="DeviceBillToAccountNumber" Index="-1" />
+        <ColumnInfo Id="DeviceLocation" Index="-1" />
+        <ColumnInfo Id="DeviceLocationAccountName" Index="-1" />
+        <ColumnInfo Id="DeviceLocationAccountNumber" Index="-1" />
+        <ColumnInfo Id="DeviceLocationCountryCode" Index="-1" />
+        <ColumnInfo Id="DeviceMaterialName" Index="-1" />
+        <ColumnInfo Id="DeviceMaterialNumber" Index="-1" />
+        <ColumnInfo Id="DeviceReferenceSystemType" Index="-1" />
+        <ColumnInfo Id="DeviceSerialNo" Index="-1" />
+        <ColumnInfo Id="DeviceShipToAccountNumber" Index="-1" />
+        <ColumnInfo Id="DeviceSoldToAccountNumber" Index="-1" />
+        <ColumnInfo Id="IsActivated" Index="-1" />
+        <ColumnInfo Id="IsMostCurrentSnapshot" Index="-1" />
+        <ColumnInfo Id="SnapshotDate" Index="-1" />
+        <ColumnInfo Id="WasDeactivated" Index="-1" />
+        <ColumnInfo Id="WasNewlyActivated" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="DpActivatedAsap_ListView_CurrentSnapshots" ClassName="iData.AsapsPipeline.Entities.DpActivatedAsap" EditorTypeName="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor" DataAccessMode="Server" AllowDelete="False" AllowLink="False" ShowAutoFilterRow="True" ShowSelectionColumn="False" AllowNew="False" Criteria="[IsMostCurrentSnapshot] = True And [IsActivated] = True And [AsapTechnicalName] Not Like 'U_%'" Caption="Currently Activated ASAPs" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AsapGtin" PropertyName="AsapGtin" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapLoincCode" PropertyName="AsapLoincCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapMaterialNameLong" PropertyName="AsapMaterialNameLong" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapMaterialNameMedium" PropertyName="AsapMaterialNameMedium" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapMaterialNumber" PropertyName="AsapMaterialNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapTechnicalName" PropertyName="AsapTechnicalName" Index="-1" SortIndex="1" IsNewNode="True" />
+        <ColumnInfo Id="AsapUsi" PropertyName="AsapUsi" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceBillToAccountNumber" PropertyName="DeviceBillToAccountNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocationAccountNumber" PropertyName="DeviceLocationAccountNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocationCountryCode" PropertyName="DeviceLocationCountryCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceMaterialName" PropertyName="DeviceMaterialName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceMaterialNumber" PropertyName="DeviceMaterialNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceSoldToAccountNumber" PropertyName="DeviceSoldToAccountNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsActivated" PropertyName="IsActivated" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsMostCurrentSnapshot" PropertyName="IsMostCurrentSnapshot" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SnapshotDate" PropertyName="SnapshotDate" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="WasDeactivated" PropertyName="WasDeactivated" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="WasNewlyActivated" PropertyName="WasNewlyActivated" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapLifeCycleTeam" PropertyName="AsapLifeCycleTeam" Index="0" Caption="Life Cycle Team" IsNewNode="True" />
+        <ColumnInfo Id="AsapAssay" PropertyName="AsapAssay" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="AsapSoftwareName" PropertyName="AsapSoftwareName" SortIndex="0" SortOrder="Ascending" Index="2" Width="159" IsNewNode="True" />
+        <ColumnInfo Id="AsapVersion" PropertyName="AsapVersion" Index="3" Width="143" IsNewNode="True" />
+        <ColumnInfo Id="DeviceReferenceSystemType" PropertyName="DeviceReferenceSystemType" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="DeviceSerialNo" PropertyName="DeviceSerialNo" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocationAccountName" PropertyName="DeviceLocationAccountName" Index="6" SortOrder="Descending" SortIndex="0" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocation" PropertyName="DeviceLocation" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="DeviceShipToAccountNumber" PropertyName="DeviceShipToAccountNumber" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="DpActivatedAsap_ListView_HistoryTracker" ClassName="iData.AsapsPipeline.Entities.DpActivatedAsap" EditorTypeName="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor" DataAccessMode="Server" AllowDelete="False" AllowLink="False" ShowAutoFilterRow="True" ShowSelectionColumn="False" AllowNew="False" IsGroupPanelVisible="True" Caption="ASAPs Activation History" Criteria="[AsapTechnicalName] Not Like 'U_%'" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AsapAssay" PropertyName="AsapAssay" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapGtin" PropertyName="AsapGtin" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapLifeCycleTeam" PropertyName="AsapLifeCycleTeam" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapLoincCode" PropertyName="AsapLoincCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapMaterialNameLong" PropertyName="AsapMaterialNameLong" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapMaterialNameMedium" PropertyName="AsapMaterialNameMedium" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapMaterialNumber" PropertyName="AsapMaterialNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapTechnicalName" PropertyName="AsapTechnicalName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapUsi" PropertyName="AsapUsi" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceBillToAccountNumber" PropertyName="DeviceBillToAccountNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocation" PropertyName="DeviceLocation" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocationAccountName" PropertyName="DeviceLocationAccountName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocationAccountNumber" PropertyName="DeviceLocationAccountNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceLocationCountryCode" PropertyName="DeviceLocationCountryCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceMaterialName" PropertyName="DeviceMaterialName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceMaterialNumber" PropertyName="DeviceMaterialNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DeviceSoldToAccountNumber" PropertyName="DeviceSoldToAccountNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsMostCurrentSnapshot" PropertyName="IsMostCurrentSnapshot" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapSoftwareName" PropertyName="AsapSoftwareName" SortIndex="0" SortOrder="Ascending" Index="0" Width="129" IsNewNode="True" />
+        <ColumnInfo Id="DeviceReferenceSystemType" PropertyName="DeviceReferenceSystemType" Index="1" SortOrder="Ascending" GroupIndex="0" IsNewNode="True" />
+        <ColumnInfo Id="DeviceSerialNo" PropertyName="DeviceSerialNo" Index="2" SortOrder="Ascending" GroupIndex="1" IsNewNode="True" />
+        <ColumnInfo Id="SnapshotDate" PropertyName="SnapshotDate" Index="3" SortOrder="Ascending" GroupIndex="2" IsNewNode="True" />
+        <ColumnInfo Id="AsapVersion" PropertyName="AsapVersion" Index="4" Width="143" IsNewNode="True" />
+        <ColumnInfo Id="IsActivated" PropertyName="IsActivated" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="WasNewlyActivated" PropertyName="WasNewlyActivated" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="WasDeactivated" PropertyName="WasDeactivated" Index="7" IsNewNode="True" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="Logo">
+  <NavigationItems ShowImages="False" DefaultChildItemsDisplayStyle="List" NavigationStyle="Accordion">
+    <Items>
+      <Item Id="AsapRecords" Index="0" Caption="ASAP Stewardship" />
+      <Item Id="Governance" Index="2" />
+      <Item Id="Administration">
+        <Items>
+          <Item Id="@2b24f600-0370-4a5d-95b7-63b3e67f3ba8" ViewId="DashboardData_ListView" IsNewNode="True" />
+          <Item Id="@d48eeea1-8b28-4cfd-96bd-325bb57e9842" ViewId="CidmRole_ListView" />
+        </Items>
+      </Item>
+      <Item Id="Reports" Removed="True">
+        <Items>
+          <Item Id="Dashboards" Removed="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options UIType="TabbedMDI" RestoreTabbedMdiLayout="False">
+    <Dashboards EnableCustomization="False" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="24.1.3.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="24.1.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="BaseBO_AuditTrail_ListView" AllowLink="False" AllowNew="False" AllowUnlink="False" AllowDelete="False">
+      <Columns>
+        <ColumnInfo Id="ModifiedOn" Index="0" SortIndex="0" SortOrder="Descending" />
+        <ColumnInfo Id="UserName" Width="124" Index="1" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PermissionPolicyRole_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors1" ShowCaption="False" RelativeSize="8.591408591408591">
+            <LayoutItem Id="Name" RelativeSize="37.2093023255814" />
+            <LayoutItem Id="IsAdministrative" RelativeSize="27.906976744186046" />
+            <LayoutItem Id="PermissionPolicy" Index="2" RelativeSize="34.883720930232556" />
+            <LayoutItem Id="CanEditModel" Removed="True" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs1" RelativeSize="91.4085914085914">
+            <LayoutGroup Id="Users" ShowCaption="True" RelativeSize="100">
+              <LayoutItem Id="Users" Index="0" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="TypePermissions" ShowCaption="True" RelativeSize="100">
+              <LayoutItem Id="TypePermissions" Index="0" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="NavigationPermissions" ShowCaption="True" RelativeSize="100">
+              <LayoutItem Id="NavigationPermissions" Index="0" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ActionPermissions" ShowCaption="True" RelativeSize="100">
+              <LayoutItem Id="ActionPermissions" Index="0" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyUser_DetailView">
+      <Items>
+        <PropertyEditor Id="Roles" View="PermissionPolicyUser_Roles_ListView" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PermissionPolicyUser">
+              <LayoutItem Id="ChangePasswordOnFirstLogon" Removed="True" />
+              <LayoutItem Id="IsActive" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PermissionPolicyUser_ListView">
+      <Columns>
+        <ColumnInfo Id="ChangePasswordOnFirstLogon" Index="-1" />
+        <ColumnInfo Id="IsActive" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="PermissionPolicyUser_Roles_ListView">
+      <Columns>
+        <ColumnInfo Id="CanEditModel" Index="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

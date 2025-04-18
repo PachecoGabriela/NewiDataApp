@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Configurations>Debug;Release;EasyTest</Configurations>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Bootstrap\ASAPDatabase.xlsx" />
+    <None Remove="Bootstrap\InitialAsapRepo.csv" />
+    <None Remove="Images\AsapEntry.png" />
+    <None Remove="Images\compliance1.svg" />
+    <None Remove="Images\compliance2.svg" />
+    <None Remove="Images\DataProduct.svg" />
+    <None Remove="Images\MappingTerm.svg" />
+    <None Remove="Images\OpenTerm.png" />
+    <None Remove="Images\Refresh.svg" />
+    <None Remove="Images\TraySelection .svg" />
+    <None Remove="Images\Version.svg" />
+    <None Remove="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bootstrap\ASAPDatabase.xlsx" />
+    <EmbeddedResource Include="Bootstrap\InitialAsapRepo.csv" />
+    <EmbeddedResource Include="Images\AsapEntry.png" />
+    <EmbeddedResource Include="Images\compliance1.svg" />
+    <EmbeddedResource Include="Images\compliance2.svg" />
+    <EmbeddedResource Include="Images\DataProduct.svg" />
+    <EmbeddedResource Include="Images\MappingTerm.svg" />
+    <EmbeddedResource Include="Images\OpenTerm.png" />
+    <EmbeddedResource Include="Images\Refresh.svg" />
+    <EmbeddedResource Include="Images\TraySelection .svg" />
+    <EmbeddedResource Include="Images\Version.svg" />
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="DevExpress.ExpressApp" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.Base" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="24.1.6" />
+    <PackageReference Include="EPPlus" Version="7.3.2" />
+    <PackageReference Include="FuzzySharp" Version="2.0.2" />
+    <PackageReference Include="NPOI" Version="2.7.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Roche.Common.Workflow\Roche.Common.Workflow.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="UnusableNodes.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes1.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+  </ItemGroup>
+</Project>

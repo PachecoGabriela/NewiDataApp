@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <NavigationItems>
+    <Items>
+      <Item Id="AsapRecords" Caption="ASAP Records" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="AsapEntryNew_ListView" ObjectKey="" Index="0" Caption="ASAP Entry" ViewId="AsapEntryRecord_ListView" IsNewNode="True" />
+          <Item Id="AsapAssay_ListView" ViewId="AsapAssay_ListView" ObjectKey="" Index="1" IsNewNode="True" />
+          <Item Id="AsapLifeCycleTeam_ListView" ViewId="AsapLifeCycleTeam_ListView" ObjectKey="" Index="2" IsNewNode="True" />
+          <Item Id="ASAPPublishing" Caption="ASAP Publishing" ViewId="AsapVersion_ListView_Publishing" Index="3" IsNewNode="True" />
+          <Item Id="AsapRepositoryDataProduct_ListView" ViewId="AsapRepositoryDataProduct_ListView" ObjectKey="" Index="4" IsNewNode="True" />
+          <Item Id="RecordsNotMatchedToAsapRepositoryRecords_ListView" ViewId="RecordsNotMatchedToAsapRepositoryRecords_ListView" Index="5" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Removed="True">
+        <Items>
+          <Item Id="AsapEntryNew_ListView" Index="0" Removed="True" />
+          <Item Id="AsapAssay_ListView" Removed="True" />
+          <Item Id="AsapLifeCycleTeam_ListView" Removed="True" />
+          <Item Id="AsapMappingTerm_ListView" Removed="True" />
+          <Item Id="AsapRepositoryDataProduct_ListView" Removed="True" />
+          <Item Id="AsapVersion_ListView" Removed="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="24.1.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="AsapAssay_ListView" ShowAutoFilterRow="True" />
+    <DetailView Id="AsapEntryRecord_DetailView">
+      <Items>
+        <PropertyEditor Id="Assay" LookupEditorMode="AllItemsWithSearch" LookupProperty="DisplayName" PropertyName="Assay" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="41.72185430463576">
+            <LayoutGroup Id="AsapEntryRecord" Caption="ASAP Entry" RelativeSize="100">
+              <LayoutGroup Id="AsapEntryRecord_col1" RelativeSize="50">
+                <LayoutItem Id="AsapName" RelativeSize="27.083333333333332" />
+                <LayoutItem Id="LifeCycleTeam" RelativeSize="22.916666666666668" />
+                <LayoutItem Id="Assay" RelativeSize="22.916666666666668" />
+                <LayoutItem Id="SystemType" RelativeSize="27.083333333333332" />
+              </LayoutGroup>
+              <LayoutGroup Id="AsapEntryRecord_col2" RelativeSize="50">
+                <LayoutItem Id="USI" RelativeSize="27.083333333333332" />
+                <LayoutItem Id="LoincCode" RelativeSize="72.91666666666667" />
+                <LayoutItem Id="Similarity" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="58.27814569536424">
+            <LayoutGroup Id="Versions" RelativeSize="100">
+              <LayoutItem Id="Versions" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="MappingTerms" RelativeSize="100">
+              <LayoutItem Id="MappingTerms" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="AsapEntryRecord_ListView" ShowAutoFilterRow="True">
+      <Columns>
+        <ColumnInfo Id="Similarity" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="AsapEntryRecord_ListView_SimilarRecords" ClassName="iData.Dp.AsapRecords.BusinessObjects.AsapEntryRecord" ShowAutoFilterRow="True" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Assay" PropertyName="Assay" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DisplayName" PropertyName="DisplayName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="InsertTimestamp" PropertyName="InsertTimestamp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="InsertUser" PropertyName="InsertUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LifeCycleTeam" PropertyName="LifeCycleTeam" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LoincCode" PropertyName="LoincCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RecordIdentifier" PropertyName="RecordIdentifier" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SystemType" PropertyName="SystemType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTimestamp" PropertyName="UpdateTimestamp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateUser" PropertyName="UpdateUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="USI" PropertyName="USI" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapName" PropertyName="AsapName" Index="0" Width="155" IsNewNode="True" />
+        <ColumnInfo Id="Similarity" PropertyName="Similarity" Index="1" Width="168" IsNewNode="True" />
+      </Columns>
+      <Sorting IsNewNode="True">
+        <SortProperty Id="SimilaritySorting" Direction="Descending" PropertyName="Similarity" IsNewNode="True" />
+      </Sorting>
+    </ListView>
+    <ListView Id="AsapEntryRecord_MappingTerms_ListView" Filter="[IsPrimary] = False" />
+    <ListView Id="AsapEntryRecord_Versions_ListView" DetailViewID="AsapVersion_DetailView_NoButton">
+      <Columns>
+        <ColumnInfo Id="WorkStatus" Index="-1" />
+        <ColumnInfo Id="WorkflowStatus" Index="2" />
+      </Columns>
+    </ListView>
+    <ListView Id="AsapLifeCycleTeam_ListView" ShowAutoFilterRow="True" />
+    <DetailView Id="AsapRepositoryDataProduct_DetailView" AllowDelete="False" AllowEdit="False" AllowNew="False" />
+    <ListView Id="AsapRepositoryDataProduct_ListView" ShowAutoFilterRow="True" AllowDelete="False" AllowNew="False">
+      <Columns>
+        <ColumnInfo Id="AsapName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <DetailView Id="AsapVersion_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="18.1592039800995">
+            <LayoutGroup Id="AsapVersion" RelativeSize="100">
+              <LayoutItem Id="Version" RelativeSize="35.61643835616438" />
+              <LayoutItem Id="MaterialNumber" RelativeSize="30.136986301369863" />
+              <LayoutItem Id="WorkStatus" RelativeSize="34.24657534246575" />
+            </LayoutGroup>
+            <LayoutGroup Id="BaseWorkflowBO" Caption="Workflow Status" RelativeSize="25.510204081632654" Removed="True">
+              <LayoutItem Id="WorkflowStatus" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="AuditTrail_Group" Direction="Vertical" RelativeSize="81.8407960199005">
+            <LayoutItem Id="AuditTrail" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="AsapVersion_DetailView_NoButton" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" CustomizationEnabled="True" ClassName="iData.Dp.AsapRecords.BusinessObjects.AsapVersion" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="SaveAndNew" IsNewNode="True" />
+      </HiddenActions>
+      <Items IsNewNode="True">
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="BaseBO_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="DisplayName" PropertyName="DisplayName" IsNewNode="True" />
+        <PropertyEditor Id="InsertTimestamp" PropertyName="InsertTimestamp" IsNewNode="True" />
+        <PropertyEditor Id="InsertUser" PropertyName="InsertUser" IsNewNode="True" />
+        <PropertyEditor Id="MaterialNumber" PropertyName="MaterialNumber" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="RecordIdentifier" PropertyName="RecordIdentifier" IsNewNode="True" />
+        <PropertyEditor Id="UpdateTimestamp" PropertyName="UpdateTimestamp" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Version" PropertyName="Version" IsNewNode="True" />
+        <PropertyEditor Id="WorkflowStatus" PropertyName="WorkflowStatus" IsNewNode="True" />
+        <PropertyEditor Id="WorkStatus" PropertyName="WorkStatus" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="18.1592039800995" IsNewNode="True">
+            <LayoutGroup Id="AsapVersion" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Version" ViewItem="Version" ShowCaption="" Index="0" RelativeSize="35.61643835616438" IsNewNode="True" />
+              <LayoutItem Id="MaterialNumber" ViewItem="MaterialNumber" ShowCaption="" Index="1" RelativeSize="30.136986301369863" IsNewNode="True" />
+              <LayoutItem Id="WorkStatus" ViewItem="WorkStatus" ShowCaption="" Index="2" RelativeSize="34.24657534246575" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="AuditTrail_Group" Index="1" ShowCaption="True" RelativeSize="81.8407960199005" IsNewNode="True">
+            <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="AsapVersion_DetailView_Publishing" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" CustomizationEnabled="True" ClassName="iData.Dp.AsapRecords.BusinessObjects.AsapVersion" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="AsapEntry.AsapName" PropertyName="AsapEntry.AsapName" IsNewNode="True" />
+        <PropertyEditor Id="AsapEntry.SystemType" PropertyName="AsapEntry.SystemType" IsNewNode="True" />
+        <PropertyEditor Id="AuditTrail" PropertyName="AuditTrail" View="BaseBO_AuditTrail_ListView" IsNewNode="True" />
+        <PropertyEditor Id="DisplayName" PropertyName="DisplayName" IsNewNode="True" />
+        <PropertyEditor Id="InsertTimestamp" PropertyName="InsertTimestamp" IsNewNode="True" />
+        <PropertyEditor Id="InsertUser" PropertyName="InsertUser" IsNewNode="True" />
+        <PropertyEditor Id="MaterialNumber" PropertyName="MaterialNumber" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="RecordIdentifier" PropertyName="RecordIdentifier" IsNewNode="True" />
+        <PropertyEditor Id="UpdateTimestamp" PropertyName="UpdateTimestamp" IsNewNode="True" />
+        <PropertyEditor Id="UpdateUser" PropertyName="UpdateUser" IsNewNode="True" />
+        <PropertyEditor Id="Version" PropertyName="Version" IsNewNode="True" />
+        <PropertyEditor Id="WorkflowStatus" PropertyName="WorkflowStatus" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="14.890885750962774" IsNewNode="True">
+            <LayoutGroup Id="AsapVersion" Index="0" ShowCaption="False" RelativeSize="71.55172413793103" Direction="Horizontal" Caption="AsapVersion" IsNewNode="True">
+              <LayoutGroup Id="Auto3785960e-3bb9-4416-93b4-e38d6c140e25" ShowCaption="False" Caption="" Index="0" RelativeSize="48.30383480825959" IsNewNode="True">
+                <LayoutItem Id="AsapEntry.AsapName" ViewItem="AsapEntry.AsapName" Index="0" RelativeSize="38.55421686746988" IsNewNode="True" />
+                <LayoutItem Id="Version" ViewItem="Version" Index="1" RelativeSize="28.91566265060241" IsNewNode="True" />
+                <LayoutItem Id="MaterialNumber" ViewItem="MaterialNumber" Index="2" RelativeSize="32.53012048192771" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto288c46da-0ed9-4b11-a663-89b4dcba4c8b" ShowCaption="False" Caption="" Index="1" RelativeSize="51.69616519174041" IsNewNode="True">
+                <LayoutItem Id="AsapEntry.Assay.AssayDescription" ViewItem="AsapEntry.Assay.AssayDescription" Index="0" RelativeSize="38.55421686746988" IsNewNode="True" />
+                <LayoutItem Id="AsapEntry.LifeCycleTeam.LifeCycleTeam" ViewItem="AsapEntry.LifeCycleTeam.LifeCycleTeam" Index="1" RelativeSize="28.91566265060241" IsNewNode="True" />
+                <LayoutItem Id="AsapEntry.SystemType" ViewItem="AsapEntry.SystemType" Index="2" RelativeSize="32.53012048192771" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="BaseWorkflowBO" Index="1" ShowCaption="False" RelativeSize="28.448275862068964" IsNewNode="True">
+              <LayoutItem Id="WorkflowStatus" ViewItem="WorkflowStatus" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="AuditTrail_Group" Index="1" Direction="Vertical" ShowCaption="True" RelativeSize="85.10911424903723" IsNewNode="True">
+            <LayoutItem Id="AuditTrail" ViewItem="AuditTrail" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="AsapVersion_ListView">
+      <Columns>
+        <ColumnInfo Id="AsapEntry" Index="-1" />
+        <ColumnInfo Id="WorkflowStatus" Index="2" />
+      </Columns>
+    </ListView>
+    <ListView Id="AsapVersion_ListView_Publishing" ClassName="iData.Dp.AsapRecords.BusinessObjects.AsapVersion" MasterDetailView="AsapVersion_DetailView_Publishing" DetailViewID="AsapVersion_DetailView_Publishing" ShowAutoFilterRow="True" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AsapEntry" PropertyName="AsapEntry" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DisplayName" PropertyName="DisplayName" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="InsertTimestamp" PropertyName="InsertTimestamp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="InsertUser" PropertyName="InsertUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="RecordIdentifier" PropertyName="RecordIdentifier" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateTimestamp" PropertyName="UpdateTimestamp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UpdateUser" PropertyName="UpdateUser" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AsapEntry.AsapName" PropertyName="AsapEntry.AsapName" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Version" PropertyName="Version" Index="1" Width="134" IsNewNode="True" />
+        <ColumnInfo Id="MaterialNumber" PropertyName="MaterialNumber" Index="2" Width="146" IsNewNode="True" />
+        <ColumnInfo Id="AsapEntry.SystemType" PropertyName="AsapEntry.SystemType" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="WorkflowStatus" PropertyName="WorkflowStatus" Index="6" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="RecordsNotMatchedToAsapRepositoryRecords_DetailView" AllowDelete="False" AllowEdit="False" AllowNew="False" />
+    <ListView Id="RecordsNotMatchedToAsapRepositoryRecords_ListView" AllowDelete="False" AllowNew="False" />
+  </Views>
+</Application>

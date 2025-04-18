@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <ActionToContainerMapping>
+      <ActionContainer Id="RedshiftEnpoint" IsNewNode="True">
+        <ActionLink ActionId="CreateRecreateRedshiftView" Index="0" IsNewNode="True" />
+      </ActionContainer>
+      <ActionContainer Id="RedshiftRoles" IsNewNode="True">
+        <ActionLink ActionId="CreateRecreateIamRole" Index="1" IsNewNode="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="iData.Dp.CompGov.Entities.DataElement" ImageName="DataElement" />
+    <Class Name="iData.Dp.CompGov.Entities.DatasourceAccessGrant" ImageName="Grant" />
+    <Class Name="iData.Dp.CompGov.Entities.DeviceDataAccessGrant" ImageName="Grant" IsCloneable="True" />
+    <Class Name="iData.Dp.CompGov.Entities.DeviceDataAccessGrantValidityPeriod" ImageName="Calendar">
+      <OwnMembers>
+        <Member Name="End" DisplayFormat="{0:yyyy-MM-dd}" EditMask="{0:yyyy-MM-dd}" />
+        <Member Name="Start" DisplayFormat="{0:yyyy-MM-dd}" EditMask="{0:yyyy-MM-dd}" />
+      </OwnMembers>
+    </Class>
+    <Class Name="iData.Dp.CompGov.Entities.iDataDataProduct" ImageName="DataProduct">
+      <OwnMembers>
+        <Member Name="RequiresUseCaseSpecficEndpoints" Caption="Requires Use Case Specific Endpoints" />
+      </OwnMembers>
+    </Class>
+    <Class Name="iData.Dp.CompGov.Entities.IntakeRequesterDepartment" ImageName="Department" />
+    <Class Name="iData.Dp.CompGov.Entities.IntakeRequestUsecaseCandidate" ImageName="Intake" IsCloneable="True">
+      <OwnMembers>
+        <Member Name="AdditionalMaterialLinks" PropertyEditorType="Roche.Common.Editors.HtmlPropertyEditor" />
+        <Member Name="BusinessValue" PropertyEditorType="Roche.Common.Editors.HtmlPropertyEditor" />
+        <Member Name="Description" PropertyEditorType="Roche.Common.Editors.HtmlPropertyEditor" />
+        <Member Name="Notes" PropertyEditorType="Roche.Common.Editors.HtmlPropertyEditor" />
+        <Member Name="Summary" PropertyEditorType="Roche.Common.Editors.HtmlPropertyEditor" />
+      </OwnMembers>
+    </Class>
+    <Class Name="iData.Dp.CompGov.Entities.UseCase" ImageName="UseCase">
+      <OwnMembers>
+        <Member Name="Description" PropertyEditorType="Roche.Common.Editors.HtmlPropertyEditor" />
+      </OwnMembers>
+    </Class>
+    <Class Name="iData.Dp.CompGov.Entities.UseCaseSpecificDataProductEndpoint" ImageName="Endpoint" />
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Administration" Caption="Administration" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="ConnectedDevicesDp_DetailView" ViewId="ConnectedDevicesDp_DetailView" ObjectKey="1" Index="1" IsNewNode="True" />
+          <Item Id="@6b20676f-4e61-4c28-baaa-d5f7920f6273" Caption="Redshift Configuration" ViewId="RedshiftConfig_DetailView" ObjectKey="1" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Caption="Administration" Removed="True">
+        <Items>
+          <Item Id="UseCase_ListView" Caption="Use Cases" Removed="True" />
+        </Items>
+      </Item>
+      <Item Id="Governance" Caption="Governance" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="@8c1aff10-12bf-4213-97be-16272f14b87c" Caption="Data Element Registry" Index="0" ViewId="DataElement_ListView" IsNewNode="True" />
+          <Item Id="@4015bd6b-29e5-438c-9ecf-c2c327caac50" ViewId="iDataDataProduct_ListView" Caption="Data Product Registry" Index="1" IsNewNode="True" />
+          <Item Id="UseCase_ListView" ObjectKey="" ViewId="UseCase_ListView" Caption="Use Cases" Index="2" IsNewNode="True" />
+          <Item Id="@2b9f295a-031d-457f-b53d-1d17a4aebb40" ViewId="IntakeRequesterDepartment_ListView" IsNewNode="True" />
+          <Item Id="@7df41e45-7321-4323-a851-a31f3a4d6a77" ViewId="IntakeRequestUsecaseCandidate_ListView" IsNewNode="True" />
+          <Item Id="UseCaseSpecificDataProductEndpoint_ListView_Endpoints" ViewId="UseCaseSpecificDataProductEndpoint_ListView_Endpoints" Visible="False" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="24.1.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="24.1.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="BaseBO_AuditTrail_ListView">
+      <Columns>
+        <ColumnInfo Id="UserName" Width="208" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ConnectedDevicesDp_DetailView" Caption="Connected Devices DP" AllowNew="False" AllowEdit="False" AllowDelete="False" CustomizationEnabled="False">
+      <HiddenActions>
+        <ActionLink ActionId="New" IsNewNode="True" />
+        <ActionLink ActionId="NextObject" IsNewNode="True" />
+        <ActionLink ActionId="PreviousObject" IsNewNode="True" />
+        <ActionLink ActionId="Refresh" IsNewNode="True" />
+        <ActionLink ActionId="Save" IsNewNode="True" />
+        <ActionLink ActionId="SaveAndClose" IsNewNode="True" />
+        <ActionLink ActionId="SaveAndNew" IsNewNode="True" />
+      </HiddenActions>
+      <Items>
+        <PropertyEditor Id="ViewName" PropertyEditorType="iData.Dp.CompGov.Editors.RedshiftViewer" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="ConnectedDevicesDp" RelativeSize="100">
+              <LayoutItem Id="ViewName" ShowCaption="False" RelativeSize="100" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DataElement_ListView">
+      <Columns>
+        <ColumnInfo Id="WorkflowStatus" Index="0" />
+        <ColumnInfo Id="AttributeName" Index="1" />
+        <ColumnInfo Id="Type" Index="2" />
+        <ColumnInfo Id="Description" Index="3" />
+        <ColumnInfo Id="RiraDocumentId" Index="4" />
+        <ColumnInfo Id="RiraLink" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DeviceDataAccessGrant_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="7.673267326732673">
+            <LayoutGroup Id="DeviceDataAccessGrant" RelativeSize="100" Direction="Horizontal">
+              <LayoutGroup Id="Auto10235db7-6400-42e6-98c0-59c02775ea83" ShowCaption="False" Caption="" Index="0" RelativeSize="49.94026284348865" IsNewNode="True">
+                <LayoutItem Id="Serial" ViewItem="Serial" Index="0" RelativeSize="51.61290322580645" IsNewNode="True" />
+                <LayoutItem Id="DeviceMaterialNumber" ViewItem="DeviceMaterialNumber" Index="1" RelativeSize="48.38709677419355" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autofa254b03-d268-4eca-83f8-1a50f9d2fc7a" ShowCaption="False" Caption="" Index="1" RelativeSize="50.05973715651135" IsNewNode="True">
+                <LayoutItem Id="SystemReferenceType" ViewItem="SystemReferenceType" Index="0" RelativeSize="51.61290322580645" IsNewNode="True" />
+                <LayoutItem Id="SystemType" ViewItem="SystemType" Index="1" RelativeSize="48.38709677419355" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="DeviceMaterialNumber" Index="1" RelativeSize="27.906976744186046" Removed="True" />
+              <LayoutItem Id="SystemType" Index="2" RelativeSize="34.883720930232556" Removed="True" />
+              <LayoutItem Id="Serial" Removed="True" />
+              <LayoutItem Id="SystemReferenceType" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="ValidityPeriods_Group" Direction="Vertical" RelativeSize="92.32673267326733">
+            <LayoutItem Id="ValidityPeriods" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="DeviceDataAccessGrantValidityPeriod_DetailView">
+      <Items>
+        <PropertyEditor Id="End" DisplayFormat="{0:yyyy-MM-dd}" EditMask="{0:yyyy-MM-dd}" />
+      </Items>
+    </DetailView>
+    <ListView Id="DeviceDataAccessGrantValidityPeriod_ListView">
+      <Columns>
+        <ColumnInfo Id="Start" SortIndex="0" SortOrder="Ascending" />
+      </Columns>
+    </ListView>
+    <ListView Id="iDataDataProduct_DataElements_ListView">
+      <Columns>
+        <ColumnInfo Id="Description" Index="2" />
+        <ColumnInfo Id="RiraDocumentId" Index="3" />
+      </Columns>
+    </ListView>
+    <DetailView Id="iDataDataProduct_DetailView">
+      <Items>
+        <PropertyEditor Id="LatestTerraform" RowCount="10" />
+        <PropertyEditor Id="LogOutput" RowCount="10" />
+        <ActionContainerViewItem Id="Redshift Roles" ActionContainer="RedshiftRoles" Caption="Redshift Roles(10)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="15.877080665813061">
+            <LayoutGroup Id="iDataDataProduct" RelativeSize="100" ShowCaption="True" Caption="Details">
+              <LayoutGroup Id="iDataDataProduct_col1" RelativeSize="49.89247311827957">
+                <LayoutItem Id="Name" RelativeSize="36.36363636363637" />
+                <LayoutItem Id="GlobalId" RelativeSize="27.272727272727273" />
+                <LayoutItem Id="RedshiftTableName" ViewItem="RedshiftTableName" Index="2" RelativeSize="36.36363636363637" IsNewNode="True" />
+                <LayoutItem Id="RequiresUseCaseSpecficEndpoints" Index="3" RelativeSize="28.571428571428573" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="iDataDataProduct_col2" Caption="iDataDataProduct_col2" RelativeSize="50.10752688172043">
+                <LayoutItem Id="RequiresUseCaseSpecficEndpoints" ViewItem="RequiresUseCaseSpecficEndpoints" Index="0" RelativeSize="36.36363636363637" IsNewNode="True" />
+                <LayoutItem Id="CIDMGroup" RelativeSize="63.63636363636363" Index="1" />
+                <LayoutItem Id="RedshiftTableName" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="4.7375160051216385">
+            <LayoutGroup Id="AWS Syncronization" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" IsCollapsibleGroup="True" Caption="AWS Synchronization" IsGroupCollapsed="True" IsNewNode="True">
+              <LayoutItem Id="Redshift Roles" ViewItem="Redshift Roles" Index="0" RelativeSize="14.782608695652174" IsNewNode="True" />
+              <LayoutGroup Id="Auto240df496-7c8b-4890-9732-d2de8a555e8b" ShowCaption="False" Caption="Auto240df496-7c8b-4890-9732-d2de8a555e8b(10)" Direction="Horizontal" Index="1" RelativeSize="85.21739130434783" IsNewNode="True">
+                <LayoutItem Id="LogOutput" ViewItem="LogOutput" Index="0" RelativeSize="67.41935483870968" CaptionLocation="Top" CustomCSSClassName="iDataDataProduct_LogOutput" IsNewNode="True" />
+                <LayoutItem Id="LatestTerraform" ViewItem="LatestTerraform" Index="1" RelativeSize="32.58064516129032" CaptionLocation="Top" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="LatestTerraform" Removed="True" />
+            <LayoutItem Id="LogOutput" Removed="True" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="79.3854033290653">
+            <LayoutGroup Id="UseCaseEndpoints" RelativeSize="100">
+              <LayoutItem Id="UseCaseEndpoints" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="iDataDataProduct_DetailView_Endpoint" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" CustomizationEnabled="True" ClassName="iData.Dp.CompGov.Entities.iDataDataProduct" AllowNew="False" AllowEdit="False" AllowDelete="False" Caption="Data Product Endpoint" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="CIDMGroup" PropertyName="CIDMGroup" IsNewNode="True" />
+        <PropertyEditor Id="DataElements" PropertyName="DataElements" View="iDataDataProduct_DataElements_ListView" IsNewNode="True" />
+        <PropertyEditor Id="DisplayName" PropertyName="DisplayName" IsNewNode="True" />
+        <PropertyEditor Id="EndpointViewer" PropertyName="EndpointViewer" PropertyEditorType="iData.Dp.CompGov.Editors.RedshiftViewer" IsNewNode="True" />
+        <PropertyEditor Id="GlobalId" PropertyName="GlobalId" IsNewNode="True" />
+        <PropertyEditor Id="Name" PropertyName="Name" IsNewNode="True" />
+        <ActionContainerViewItem Id="Redshift Roles" ActionContainer="RedshiftRoles" Caption="Redshift Roles(10)" IsNewNode="True" />
+        <PropertyEditor Id="RedshiftTableName" PropertyName="RedshiftTableName" IsNewNode="True" />
+        <PropertyEditor Id="RequiresUseCaseSpecficEndpoints" PropertyName="RequiresUseCaseSpecficEndpoints" IsNewNode="True" />
+        <PropertyEditor Id="UseCaseEndpoints" PropertyName="UseCaseEndpoints" View="iDataDataProduct_UseCaseEndpoints_ListView" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="15.412621359223301" IsNewNode="True">
+            <LayoutGroup Id="iDataDataProduct" Index="0" Direction="Horizontal" ShowCaption="True" Caption="Details" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="iDataDataProduct_col1" Index="0" ShowCaption="False" RelativeSize="49.717514124293785" IsNewNode="True">
+                <LayoutItem Id="Name" ViewItem="Name" ShowCaption="" Index="0" RelativeSize="36.36363636363637" IsNewNode="True" />
+                <LayoutItem Id="GlobalId" ViewItem="GlobalId" ShowCaption="" Index="1" RelativeSize="27.272727272727273" IsNewNode="True" />
+                <LayoutItem Id="RedshiftTableName" ViewItem="RedshiftTableName" Index="2" RelativeSize="36.36363636363637" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="iDataDataProduct_col2" Index="1" ShowCaption="False" RelativeSize="50.282485875706215" Caption="iDataDataProduct_col2" IsNewNode="True">
+                <LayoutItem Id="RequiresUseCaseSpecficEndpoints" ViewItem="RequiresUseCaseSpecficEndpoints" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="84.5873786407767" IsNewNode="True">
+            <LayoutGroup Id="Endpoint Data" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="0" Caption="Endpoint Data" RelativeSize="100" ImageName="Actions_Database" IsNewNode="True">
+              <LayoutItem Id="EndpointViewer" ViewItem="EndpointViewer" Index="0" RelativeSize="100" ShowCaption="False" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="DataElements" Index="1" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="DataElements" ViewItem="DataElements" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="iDataDataProduct_ListView" Caption="Data Products List" />
+    <ListView Id="iDataDataProduct_LookupListView" AllowNew="False" AllowLink="False" AllowEdit="False" />
+    <ListView Id="iDataDataProduct_UseCaseEndpoints_ListView" AllowLink="False" AllowNew="True" AllowUnlink="False">
+      <Columns>
+        <ColumnInfo Id="CidmRole" Index="-1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="IntakeRequestUsecaseCandidate_DetailView">
+      <Items>
+        <PropertyEditor Id="Description" RowCount="6" />
+        <PropertyEditor Id="OtherContacts" Caption="Additional Contacts" />
+        <PropertyEditor Id="RequesterDepartment" AllowEdit="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="58.94396551724138">
+            <LayoutGroup Id="IntakeRequestUsecaseCandidate" RelativeSize="100" Direction="Vertical">
+              <LayoutGroup Id="Auto62316420-60ff-4b29-81cb-be4f47e80f90" ShowCaption="False" Caption="Auto62316420-60ff-4b29-81cb-be4f47e80f90(4)" Direction="Horizontal" Index="0" RelativeSize="26.37795275590551" IsNewNode="True">
+                <LayoutGroup Id="IntakeRequestUsecaseCandidate_col1" ShowCaption="False" Index="0" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="Title" ViewItem="Title" Index="0" RelativeSize="23.880597014925375" IsNewNode="True" />
+                  <LayoutItem Id="RequesterDepartment" ViewItem="RequesterDepartment" Index="1" RelativeSize="17.91044776119403" IsNewNode="True" />
+                  <LayoutItem Id="MainContact" ViewItem="MainContact" Index="2" RelativeSize="17.91044776119403" IsNewNode="True" />
+                  <LayoutItem Id="OtherContacts" ViewItem="OtherContacts" Index="3" RelativeSize="17.91044776119403" IsNewNode="True" />
+                  <LayoutItem Id="Sponsor" ViewItem="Sponsor" Index="4" RelativeSize="22.388059701492537" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="IntakeRequestUsecaseCandidate_col2" ShowCaption="False" Index="1" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="Region" ViewItem="Region" Index="0" RelativeSize="23.880597014925375" IsNewNode="True" />
+                  <LayoutItem Id="InstrumentLines" ViewItem="InstrumentLines" Index="1" RelativeSize="17.91044776119403" IsNewNode="True" />
+                  <LayoutItem Id="UrgencyLevel" ViewItem="UrgencyLevel" Index="2" RelativeSize="17.91044776119403" IsNewNode="True" />
+                  <LayoutItem Id="EndUsers" ViewItem="EndUsers" Index="3" RelativeSize="17.91044776119403" IsNewNode="True" />
+                  <LayoutItem Id="DataUsers" ViewItem="DataUsers" Index="4" RelativeSize="22.388059701492537" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="Summary" ViewItem="Summary" Index="1" RelativeSize="12.204724409448819" IsNewNode="True" />
+              <LayoutItem Id="Description" ViewItem="Description" Index="2" RelativeSize="22.834645669291337" IsNewNode="True" />
+              <LayoutItem Id="BusinessValue" ViewItem="BusinessValue" Index="3" RelativeSize="12.204724409448819" IsNewNode="True" />
+              <LayoutItem Id="AdditionalMaterialLinks" ViewItem="AdditionalMaterialLinks" Index="4" RelativeSize="12.204724409448819" IsNewNode="True" />
+              <LayoutItem Id="Notes" ViewItem="Notes" Index="5" RelativeSize="14.173228346456693" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="37.17672413793103" Caption="SizeableEditors">
+            <LayoutItem Id="AdditionalMaterialLinks" Index="0" RelativeSize="76.28458498023716" Removed="True" />
+            <LayoutItem Id="BusinessValue" Index="0" RelativeSize="60.130718954248366" Removed="True" />
+            <LayoutItem Id="Description" Index="0" RelativeSize="40.0593471810089" Removed="True" />
+            <LayoutItem Id="Notes" Index="0" RelativeSize="100" Removed="True" />
+            <LayoutItem Id="Summary" Removed="True" />
+          </LayoutGroup>
+          <LayoutGroup Id="AuditTrail_Group" Direction="Vertical" RelativeSize="3.8793103448275863" IsCollapsibleGroup="True" IsGroupCollapsed="True">
+            <LayoutItem Id="AuditTrail" RelativeSize="0" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="IntakeRequestUsecaseCandidate_ListView">
+      <Columns>
+        <ColumnInfo Id="DataProducts" Index="-1" />
+        <ColumnInfo Id="DataUsers" Index="-1" />
+        <ColumnInfo Id="EndUsers" Index="-1" />
+        <ColumnInfo Id="InstrumentLines" Index="-1" />
+        <ColumnInfo Id="OtherContacts" Index="-1" />
+        <ColumnInfo Id="Region" Index="-1" />
+        <ColumnInfo Id="UrgencyLevel" Index="-1" />
+        <ColumnInfo Id="RequesterDepartment" Index="0" />
+        <ColumnInfo Id="Title" Index="1" />
+        <ColumnInfo Id="Summary" Index="2" />
+        <ColumnInfo Id="MainContact" Index="3" />
+        <ColumnInfo Id="UpdateTimestamp" Index="4" />
+      </Columns>
+    </ListView>
+    <DetailView Id="UseCase_DetailView" AllowDelete="True" AllowEdit="True" AllowNew="True">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="8.415841584158416">
+            <LayoutGroup Id="UseCase" RelativeSize="100" Caption="UseCase">
+              <LayoutGroup Id="Auto248ef13a-b810-47ac-9e50-617399a3534a" ShowCaption="False" Caption="Auto248ef13a-b810-47ac-9e50-617399a3534a(4)" Direction="Horizontal" Index="0" RelativeSize="55.88235294117647" IsNewNode="True">
+                <LayoutItem Id="Title" ViewItem="Title" Index="0" RelativeSize="49.944506104328525" IsNewNode="True" />
+                <LayoutItem Id="ID" ViewItem="ID" Index="1" RelativeSize="50.055493895671475" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="IsActive" RelativeSize="44.11764705882353" />
+              <LayoutItem Id="ID" RelativeSize="34.883720930232556" Removed="True" />
+              <LayoutItem Id="Title" RelativeSize="37.2093023255814" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="24.00990099009901">
+            <LayoutItem Id="Description" RelativeSize="100" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="67.57425742574257">
+            <LayoutGroup Id="DeviceDataAccessGrants" Index="0" RelativeSize="100">
+              <LayoutItem Id="DeviceDataAccessGrants" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="DatasourceAccessGrants" Index="1" RelativeSize="100" Removed="True">
+              <LayoutItem Id="DatasourceAccessGrants" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="UseCaseEndpoints" Index="1" RelativeSize="100" Removed="True">
+              <LayoutItem Id="UseCaseEndpoints" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AuditTrail" RelativeSize="100" Removed="True">
+              <LayoutItem Id="AuditTrail" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="UseCase_DeviceDataAccessGrants_ListView">
+      <Columns>
+        <ColumnInfo Id="SystemType" SortIndex="-1" SortOrder="None" Index="-1" />
+        <ColumnInfo Id="UseCase" SortIndex="0" SortOrder="Ascending" Index="-1" />
+        <ColumnInfo Id="DeviceMaterialNumber" Index="2" />
+      </Columns>
+    </ListView>
+    <ListView Id="UseCase_ListView" Caption="Use Cases List">
+      <Columns>
+        <ColumnInfo Id="InsertTimestamp" Index="-1" />
+        <ColumnInfo Id="Description" Index="1" />
+        <ColumnInfo Id="ID" Index="2" />
+        <ColumnInfo Id="IsActive" Index="3" />
+        <ColumnInfo Id="UpdateTimestamp" Index="4" />
+      </Columns>
+    </ListView>
+    <ListView Id="UseCase_LookupListView" AllowNew="False" AllowDelete="False" />
+    <ListView Id="UseCase_UseCaseEndpoints_ListView">
+      <Columns>
+        <ColumnInfo Id="DataProduct" Index="0" />
+      </Columns>
+    </ListView>
+    <DetailView Id="UseCaseSpecificDataProductEndpoint_DetailView">
+      <Items>
+        <PropertyEditor Id="LogOutput" RowCount="15" Caption="Log History" />
+        <ActionContainerViewItem Id="RedshiftViewManagement" Caption="RedshiftViewManagement(9)" ActionContainer="RedshiftEnpoint" IsNewNode="True" />
+        <PropertyEditor Id="Use Case" PropertyName="UseCase" LookupEditorMode="AllItems" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="8.388520971302428">
+            <LayoutGroup Id="UseCaseSpecificDataProductEndpoint" RelativeSize="100" Direction="Horizontal">
+              <LayoutItem Id="Use Case" ViewItem="Use Case" Index="0" RelativeSize="43.76068376068376" IsNewNode="True" />
+              <LayoutItem Id="CIDMGroup" RelativeSize="56.23931623931624" />
+              <LayoutItem Id="EndpointName" RelativeSize="42.259887005649716" Index="2" Removed="True" />
+              <LayoutItem Id="CidmRole" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="91.61147902869757">
+            <LayoutItem Id="EndpointName" ViewItem="EndpointName" Index="0" RelativeSize="6.506024096385542" IsNewNode="True" />
+            <LayoutGroup Id="AWS Syncronization" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="93.49397590361446" IsCollapsibleGroup="True" Caption="AWS Synchronization" IsGroupCollapsed="True" IsNewNode="True">
+              <LayoutItem Id="RedshiftViewManagement" ViewItem="RedshiftViewManagement" Index="0" RelativeSize="0" IsNewNode="True" />
+              <LayoutItem Id="LogOutput" ViewItem="LogOutput" Index="1" RelativeSize="0" CustomCSSClassName="UseCaseSpecificDataProductEndpoint_LogOutput" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="LogOutput" Index="1" RelativeSize="96.11260053619303" CustomCSSClassName="LogoutTextArea" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="UseCaseSpecificDataProductEndpoint_DetailView_Endpoint" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" CustomizationEnabled="True" ClassName="iData.Dp.CompGov.Entities.UseCaseSpecificDataProductEndpoint" AllowNew="False" AllowEdit="False" AllowDelete="False" Caption="Data Product Endpoint (by Use Case)" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="CIDMGroup" PropertyName="CIDMGroup" IsNewNode="True" />
+        <PropertyEditor Id="DataProduct" PropertyName="DataProduct" IsNewNode="True" />
+        <PropertyEditor Id="EndpointName" PropertyName="EndpointName" IsNewNode="True" />
+        <PropertyEditor Id="EndpointViewer" PropertyName="EndpointViewer" PropertyEditorType="iData.Dp.CompGov.Editors.RedshiftViewer" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="Use Case" PropertyName="UseCase" LookupEditorMode="AllItems" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="4.611650485436893" IsNewNode="True">
+            <LayoutGroup Id="UseCaseSpecificDataProductEndpoint" Index="0" Direction="Horizontal" ShowCaption="False" RelativeSize="100" Caption="UseCaseSpecificDataProductEndpoint" IsNewNode="True">
+              <LayoutItem Id="DataProduct" ViewItem="DataProduct" Index="0" RelativeSize="50" IsNewNode="True" />
+              <LayoutItem Id="Use Case" ViewItem="Use Case" Index="1" RelativeSize="50" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="95.3883495145631" Caption="SizeableEditors" IsNewNode="True">
+            <LayoutItem Id="EndpointName" ViewItem="EndpointName" Index="0" RelativeSize="3.435114503816794" IsNewNode="True" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" IsNewNode="True">
+            <LayoutGroup Id="Endpoint Data" ImageName="Actions_Database" IsNewNode="True">
+              <LayoutItem Id="EndpointViewer" ViewItem="EndpointViewer" ShowCaption="False" IsNewNode="True" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="UseCaseSpecificDataProductEndpoint_ListView">
+      <Columns>
+        <ColumnInfo Id="CidmRole" Index="-1" />
+        <ColumnInfo Id="EndpointName" Index="0" />
+        <ColumnInfo Id="DataProduct" Index="1" Width="500" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.DefaultPropertyEditor" />
+        <ColumnInfo Id="UseCase" Index="2" Width="144" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.DefaultPropertyEditor" />
+      </Columns>
+    </ListView>
+    <ListView Id="UseCaseSpecificDataProductEndpoint_ListView_Endpoints" ClassName="iData.Dp.CompGov.Entities.UseCaseSpecificDataProductEndpoint" AllowNew="False" AllowDelete="False" Caption="Data Product Endpoints" DetailViewID="UseCaseSpecificDataProductEndpoint_DetailView_Endpoint" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CIDMGroup" PropertyName="CIDMGroup" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LogOutput" PropertyName="LogOutput" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="DataProduct" PropertyName="DataProduct" View="" Index="0" Width="204" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.DefaultPropertyEditor" IsNewNode="True" />
+        <ColumnInfo Id="UseCase" PropertyName="UseCase" Index="1" Width="144" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.DefaultPropertyEditor" IsNewNode="True" />
+        <ColumnInfo Id="EndpointName" PropertyName="EndpointName" SortIndex="0" SortOrder="Ascending" Index="2" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="UseCaseSpecificDataProductEndpoint_LookupListView" AllowNew="False" />
+  </Views>
+</Application>

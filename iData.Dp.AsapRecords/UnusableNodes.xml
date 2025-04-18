@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="AsapVersion_DetailView_Publishing">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="AsapVersion">
+              <LayoutGroup Id="Auto288c46da-0ed9-4b11-a663-89b4dcba4c8b">
+                <LayoutItem Id="AsapEntry.LifeCycleTeam.LifeCycleTeam" ViewItem="AsapEntry.LifeCycleTeam.LifeCycleTeam" />
+                <LayoutItem Id="AsapEntry.Assay.AssayDescription" ViewItem="AsapEntry.Assay.AssayDescription" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

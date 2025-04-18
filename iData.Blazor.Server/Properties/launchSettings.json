@@ -1,0 +1,60 @@
+{
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "iData.Blazor.Server": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionString": "XpoProvider=MSSqlServer;Integrated Security=SSPI;Initial Catalog=iData_dev;Data Source=.",
+        "CIDM_ROLE_PRODUCT_MANAGER": "id_dev_01",
+        "ENVIRONMENT": "dev",
+        "CIDM_ROLE_ASAP_REPOSITORY_EDITOR": "id_dev_02",
+        "CIDM_ROLE_ASAP_READ_ONLY": "id_dev_03",
+        "CIDM_ROLE_ASAP_DP_CONSUMER": "id_dev_04",
+        "COGNITO_USER_POOL_ID": "eu-central-1_D0ieJaCxH",
+        "COGNITO_CLIENT_ID": "3t2dfvjt1j2pe23i0r2lbabahl",
+        "COGNITO_CLIENT_SECRET": "c68n2lvedo4v9rhvhj8rdnt08l1lclastb06bna7pdrtf9cfn6f",
+        "COGNITO_DOMAIN": "https://idata-dev.auth.eu-central-1.amazoncognito.com"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "https://+:443;http://+:80",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionString": "XpoProvider=MSSqlServer;Integrated Security=SSPI;Initial Catalog=iData_dev;Data Source=.",
+        "CIDM_ROLE_PRODUCT_MANAGER": "id_dev_01",
+        "CIDM_ROLE_ASAP_REPOSITORY_EDITOR": "id_dev_02",
+        "CIDM_ROLE_ASAP_READ_ONLY": "id_dev_03",
+        "CIDM_ROLE_ASAP_DP_CONSUMER": "id_dev_04",
+        "COGNITO_USER_POOL_ID": "eu-central-1_D0ieJaCxH",
+        "COGNITO_CLIENT_ID": "3t2dfvjt1j2pe23i0r2lbabahl",
+        "COGNITO_CLIENT_SECRET": "c68n2lvedo4v9rhvhj8rdnt08l1lclastb06bna7pdrtf9cfn6f",
+        "COGNITO_DOMAIN": "https://idata-dev.auth.eu-central-1.amazoncognito.com"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": true,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:65201",
+      "sslPort": 44318
+    }
+  }
+}
+
+

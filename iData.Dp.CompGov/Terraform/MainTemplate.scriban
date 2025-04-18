@@ -1,0 +1,26 @@
+provider "aws" {
+  region = "eu-central-1"
+}
+
+module "{{ data_product_id }}_iam_roles" {
+  source               = "./modules/iam"
+  default_role_name    = "{{ data_product_id }}"
+  identity_pool_id     = module.{{ data_product_id }}_identity_pool.identity_pool_id
+  iam_roles_with_redshift_data_api_access = [{{ for role in iam_roles_with_redshift_data_api_access }}    
+    "{{ role }}",{{ end }}
+  ]
+}
+
+module "{{ data_product_id }}_identity_pool" {
+  source                 = "./modules/cognito_identity_pool"
+  cognito_client_id      = "{{ cognito_client_id }}"
+  cognito_user_pool_id   = "{{ cognito_user_pool_id }}"
+  identity_pool_name     = "{{ data_product_id }}"
+  authenticated_role_arn = module.{{ data_product_id }}_iam_roles.default_iam_role_arn
+  cidm_groups = [{{ for group in cidm_groups }}    
+    {
+      cidm_group = "{{ group.cidm_group }}"
+      role_arn   = module.{{ data_product_id }}_iam_roles.iam_role_arns["{{ group.role }}"]
+    },{{ end }}    
+  ]
+}

@@ -1,0 +1,81 @@
+﻿@using iData.Blazor.Server.Editors
+@using iData.Dp.AsapRecords
+
+<style>
+    
+    .form-check-input:checked {
+        background-color: #1482fa; 
+        border-color: #1482fa;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="d-flex">
+            @foreach (String item in Items.Keys)
+            {
+                <div class="form-check me-3" id="div_checkbox">
+                    <input class="form-check-input" type="checkbox" @onchange="@(e => OnCheckboxChange(e, item))" id="checkbox_@item" checked="@Items[item]">
+                    <label class="form-check-label" for="checkbox_@item">
+                        @item
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+
+    private Dictionary<string, bool> Items
+    {
+        get;
+        set;
+    }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Items = new Dictionary<string, bool>();
+
+        Items.Add("Cobas 5800", false);
+        Items.Add("Cobas 6800", false);
+        Items.Add("Cobas 8800", false);
+
+        if (!String.IsNullOrEmpty(Value))
+        {
+            foreach (string item in Value.Split(';'))
+            {
+                if (!String.IsNullOrEmpty(item))
+                {
+                    Items[item] = true;
+                }
+
+            }
+        }
+    }
+
+    private void OnCheckboxChange(ChangeEventArgs e, string item)
+    {
+        bool isChecked = (bool)e.Value;
+        Items[item] = isChecked;
+        Value = null;
+        foreach (var option in Items.Keys)
+        {
+            if (Items[option])
+            {
+                Value += option + ";";
+            }
+        }
+        ValueChanged.InvokeAsync(Value);
+    }
+}

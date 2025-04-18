@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  idata.blazor.server:
+    image: ${DOCKER_REGISTRY-}idatablazorserver
+    build:
+      context: .
+      dockerfile: iData.Blazor.Server/Dockerfile
+    depends_on:
+      - db
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionString: "XpoProvider=Postgres;Server=db;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword"
+      CIDM_ROLE_PRODUCT_MANAGER: "id_dev_01"
+      CIDM_ROLE_ASAP_REPOSITORY_EDITOR: "id_dev_02"
+      CIDM_ROLE_ASAP_READ_ONLY: "id_dev_03"
+      CIDM_ROLE_ASAP_DP_CONSUMER: "id_dev_04"
+      COGNITO_CLIENT_ID: "3t2dfvjt1j2pe23i0r2lbabahl"
+      COGNITO_CLIENT_SECRET: "c68n2lvedo4v9rhvhj8rdnt08l1lclastb06bna7pdrtf9cfn6f"
+      COGNITO_DOMAIN: "https://idata-dev.auth.eu-central-1.amazoncognito.com"
+    ports:
+      - "8080:80"
+      - "5001:443"
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  postgres_data:

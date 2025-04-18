@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Configurations>Debug;Release;EasyTest</Configurations>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Dashboards\RespiratoryFlexAdoption.xml" />
+    <None Remove="Images\ASAP.png" />
+    <None Remove="Images\Dashboard.svg" />
+    <None Remove="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dashboards\RespiratoryFlexAdoption.xml" />
+    <EmbeddedResource Include="Images\ASAP.png" />
+    <EmbeddedResource Include="Images\Dashboard.svg" />
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.ExpressApp" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Dashboards.Blazor" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.Base" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="24.1.6" />
+    <PackageReference Include="Parquet.Net" Version="4.23.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.34.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iData.Module\iData.Module.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="UnusableNodes.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+  </ItemGroup>
+</Project>

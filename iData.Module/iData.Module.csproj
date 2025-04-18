@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Configurations>Debug;Release;EasyTest</Configurations>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <None Remove="Bootstrap\InitialAsapRepo.csv" />
+    <None Remove="Images\Action_ColumnChooser.png" />
+    <None Remove="Images\Action_Delete.png" />
+    <None Remove="Images\Action_Export.png" />
+    <None Remove="Images\Action_Export_ToCSV.png" />
+    <None Remove="Images\Action_Export_ToExceL.png" />
+    <None Remove="Images\Action_Navigation_Next_Object.png" />
+    <None Remove="Images\Action_Navigation_Previous_Object.png" />
+    <None Remove="Images\Action_New.png" />
+    <None Remove="Images\Action_Refresh.png" />
+    <None Remove="Images\Action_Save_New.png" />
+    <None Remove="Images\Action_Search.png" />
+    <None Remove="Images\AsapEntry.png" />
+    <None Remove="Images\AsapEntry.svg" />
+    <None Remove="Images\Filter_Editor.png" />
+    <None Remove="Images\Logo.png" />
+    <None Remove="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bootstrap\InitialAsapRepo.csv" />
+    <EmbeddedResource Include="Images\Action_ColumnChooser.png" />
+    <EmbeddedResource Include="Images\Action_Delete.png" />
+    <EmbeddedResource Include="Images\Action_Export.png" />
+    <EmbeddedResource Include="Images\Action_Export_ToCSV.png" />
+    <EmbeddedResource Include="Images\Action_Export_ToExcel.png" />
+    <EmbeddedResource Include="Images\Action_Navigation_Previous_Object.png" />
+    <EmbeddedResource Include="Images\Action_Navigation_Next_Object.png" />
+    <EmbeddedResource Include="Images\Action_New.png" />
+    <EmbeddedResource Include="Images\Action_Refresh.png" />
+    <EmbeddedResource Include="Images\Action_Save_New.png" />
+    <EmbeddedResource Include="Images\Action_Search.png" />
+    <EmbeddedResource Include="Images\AsapEntry.png" />
+    <EmbeddedResource Include="Images\Filter_Editor.png" />
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="DevExpress.ExpressApp" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.AuditTrail.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.CloneObject.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.ConditionalAppearance" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Objects" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Security.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Validation" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.ViewVariantsModule" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.WebApi" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.WebApi.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Xpo" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.Base" Version="24.1.6" />
+    <PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="24.1.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iData.Dp.AsapRecords\iData.Dp.AsapRecords.csproj" />
+    <ProjectReference Include="..\Roche.Common.Workflow\Roche.Common.Workflow.csproj" />
+    <ProjectReference Include="..\Roche.Common\Roche.Common.csproj" />
+  </ItemGroup>
+</Project>

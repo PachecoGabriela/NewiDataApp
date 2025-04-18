@@ -1,0 +1,105 @@
+body {
+    font-family: "Roche Sans", "Segoe UI","Roboto";
+}
+
+.rochelogo {
+    position: fixed;
+    right: 30px;
+    top: 10px;
+    z-index: 1000;
+    width: 80px;
+    height: auto;
+}
+
+.idlogo {
+    position: fixed;
+    left: 15px;
+    top: 5px;
+    z-index: 1000;
+    height: 51px;
+    width: auto;
+}
+
+.toolbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 60px;
+    z-index: 69;
+    background: rgba(255, 247, 245, 0.5);
+}
+
+
+.fp-controlArrow.fp-next {
+    border-color: transparent transparent transparent #1482fa
+}
+
+.fp-controlArrow.fp-prev {
+    border-color: transparent #1482fa transparent transparent
+}
+
+#menu {
+    position: fixed;
+    top: 10px;
+    left: 70px;
+    height: 40px;
+    z-index: 70;
+    width: calc(100% - 70px);
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0;
+    margin: 0;
+}
+
+    #menu li {
+        display: inline-block;
+        margin: 10px;
+        color: #000;
+        border: 1px solid #dbd6d1;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+    }
+
+        #menu li:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        #menu li.active:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        #menu li a {
+            text-decoration: none;
+            color: #000;
+            padding: 9px 18px;
+            display: block;
+        }
+
+        #menu li.active:hover a:hover {
+            color: #fff;
+        }
+
+        #menu li.active {
+            border: none;
+            background-color: #1482fa;
+        }
+
+            #menu li.active a {
+                color: white;
+            }
+
+      
+        #menu li:last-child {
+            margin-left: auto; 
+            margin-right:130px;
+            
+  
+        }
+
+            #menu li:last-child a {
+                background-color: #022366;
+                color: white;
+            }
+

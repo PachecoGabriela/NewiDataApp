@@ -1,0 +1,59 @@
+{
+  "UseCases": [
+    {
+      "Title": "Channel-Fill 2",
+      "Description": "We would like to analyze reagent consumption data from Roche instruments situated at customer sites to identify optimization opportunities. If we identify valuable improvement opportunities, we will engage with our customers with targeted improvement suggestions related to optimizing instrument capacity utilization, their diagnostics panel, and/or their supplier base.",
+      "GlobalID": "UC0001ChannelFill",
+      "GrantedDevices": [
+        {
+          "Serial": "0954-01",
+          "SystemReferenceType": "cobas 6000",
+          "ValidityDates": [
+            {
+              "Start": "2024-01-01",
+              "End": "2024-06-30"
+            },
+            {
+              "Start": "2024-07-01",
+              "End": null
+            }
+          ]
+        },
+        {
+          "Serial": "1167-04",
+          "SystemReferenceType": "cobas 6000",
+          "ValidityDates": [
+            {
+              "Start": "2024-01-01",
+              "End": "2024-06-30"
+            },
+            {
+              "Start": "2024-07-01",
+              "End": null
+            }
+          ]
+        },
+        {
+          "Serial": "C007-05",
+          "SystemReferenceType": "cobas pro",
+          "ValidityDates": [
+            {
+              "Start": "2024-01-01",
+              "End": "2024-06-30"
+            },
+            {
+              "Start": "2024-07-01",
+              "End": null
+            }
+          ]
+        }
+      ],
+      "GrantedDataSources": [
+        {
+          "Title": "Reagent Consumption Data",
+          "ID": "456f7890-f12b-34c5-d678-890e12345f67"
+        }
+      ]
+    }
+  ]
+}

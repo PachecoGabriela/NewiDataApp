@@ -1,0 +1,532 @@
+﻿@page "/"
+@model iData.Blazor.Server.Pages.IndexModel
+@namespace iData.Blazor.Server
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using DevExpress.ExpressApp.Blazor.Components
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>iData</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.26/fullpage.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.26/fullpage.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/site/css/shared.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/team.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/gov.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/dps.css" />
+
+</head>
+
+<body>
+
+    <div class="toolbar"> </div>
+
+    <img src="~/site/idlogo.svg" alt="Logo" class="idlogo">
+
+    <ul id="menu">
+        <li data-menuanchor="1"><a href="#1">Home</a></li>
+        <li data-menuanchor="2"><a href="#2">Our Data Products</a></li>
+        <li data-menuanchor="3"><a href="#3">Governance</a></li>
+        <li data-menuanchor="4"><a href="#4">Team &amp; Contact</a></li>
+        <li><a href="/LoginPage">LOG IN</a></li>
+    </ul>
+
+    <img src="~/site/logo.png" alt="Logo" class="rochelogo">
+
+    <div id="fullpage">
+
+        <div id="home" class="section">
+            <div id="videoContainer">
+                <video id="myVideo" autoplay muted>
+                    <source src="~/site/Logo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div id="dps" class="section">
+            <div class="slide dps-container">
+                <div class="dps-flip-card">
+                    <div class="dps-flip-card-inner">
+                        <div class="dps-flip-card-front">
+                            <table style="height: 330px; width:480px; margin-left: 10px; margin-right: 10px">
+                                <tr>
+                                    <td>Reagent Consumption DP</td>
+                                </tr>
+                                <tr style="height: 100%; font-size: 14pt">
+                                    <td>
+                                        The Reagent Consumption Data Product captures comprehensive information on reagent usage, including details on instruments, modules, customer data, and specific reagents and test metrics. It encompasses data from both Molecular and CoreLab devices for which it has been verified that customer agreement has been obtained when necessary, and that such use is permitted by law. Consumption data is aggregated on a daily basis.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12pt"><em>hover to learn more</em></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dps-flip-card-back">
+                            <iframe src="~/site/labels/iData Reagent Consumption - Data Product Label_20241119_2.pdf#zoom=125" style="border:none;width:100%;height:100%"></iframe>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide dps-container">
+                <div class="dps-flip-card">
+                    <div class="dps-flip-card-inner">
+                        <div class="dps-flip-card-front" style="background-color: #b22b0d;">
+                            <table style="height: 330px; width: 480px; margin-left: 10px; margin-right: 10px">
+                                <tr>
+                                    <td>Consumables Consumption Molecular DP</td>
+                                </tr>
+                                <tr style="height: 100%; font-size: 14pt">
+                                    <td>
+                                        The Consumables Consumption Molecular Data Product records detailed information on the use of consumables in 5800 and 68/8800 instruments.
+
+                                        Each consumable instance is uniquely identified by its lot and serial number. When a consumable is used for the first time in an instrument, the Data Product records a data point including details such as it's barcode (where applicable), the date of its first use, and specific information about the instrument and the customer.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12pt"><em>hover to learn more</em></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dps-flip-card-back">
+                            <iframe src="~/site/labels/iData Consumables Consumption Molecular - Data Product Label_20241119.pdf#zoom=125" style="border:none;width:100%;height:100%"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide dps-container">
+                <div class="dps-flip-card">
+                    <div class="dps-flip-card-inner">
+                        <div class="dps-flip-card-front" style="background-color: #ed4a0d;">
+                            <table style="height: 330px; width: 480px; margin-left: 10px; margin-right: 10px">
+                                <tr>
+                                    <td>Activated ASAPs DP</td>
+                                </tr>
+                                <tr style="height: 100%; font-size: 14pt">
+                                    <td>
+                                        The Activated ASAPs Data Product tracks the activation status of Assay Specific Analysis Packages (ASAPs) on molecular analyzers for which it has been verified that customer agreement has been obtained when necessary, and that such use is permitted by law.
+                                        It  maintains a chronological record of ASAP activations and deactivations, structured as snapshots that capture changes in status.
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12pt"><em>hover to learn more</em></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dps-flip-card-back">
+                            <iframe src="~/site/labels/iData Activated ASAPs - Data Product Label_20241119.pdf#zoom=125" style="border:none;width:100%;height:100%"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="slide dps-container">
+                <div class="dps-flip-card">
+                    <div class="dps-flip-card-inner">
+                        <div class="dps-flip-card-front" style="background-color: #7d0096;">
+                            <table style="height: 330px; width: 480px; margin-left: 10px; margin-right: 10px">
+                                <tr>
+                                    <td>ASAP Repository DP</td>
+                                </tr>
+                                <tr style="height: 100%; font-size: 14pt">
+                                    <td>The ASAP Repository Data Product holds detailed information about specific versions of Assay Specific Analysis Packages (ASAPs), including technical names, SAP material names, material numbers, and LOINC codes. It can serve as the source for mapping technical ASAP names as received from the instruments to SAP material master records and linking ASAPs to corresponding LOINC codes, providing an overview of the ASAP portfolio.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12pt"><em>hover to learn more</em></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dps-flip-card-back">
+                            <iframe src="~/site/labels/iData ASAP Repository - Data Product Label_20241119.pdf#zoom=125" style="border:none;width:100%;height:100%"></iframe>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="gov" class="section">
+            <div class="gov-header">
+                Depending on local regulations and customer contracts, we may use instrument data for certain purposes only.<br />
+                Therefore, accessing our data products involves a streamlined Data Governance process.<br />
+            </div>
+
+            <div class="gov-container">
+                <div class="gov-flip-card gov-item">
+                    <div class="gov-flip-card-inner">
+                        <div class="gov-flip-card-front">
+                            <img src="~/site/images/gov_a.svg" alt="Idea">
+                            <div class="gov-title">Idea</div>
+                        </div>
+                        <div class="gov-flip-card-back">
+                            <div class="gov-desc">You’ve got an idea that needs data generated by Roche products.<br />Let’s make it happen!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gov-arrow">&#8594;</div>
+
+                <div class="gov-flip-card gov-item">
+                    <div class="gov-flip-card-inner">
+                        <div class="gov-flip-card-front">
+                            <img src="~/site/images/gov_b.svg" alt="Classification">
+                            <div class="gov-title">Classification</div>
+                        </div>
+                        <div class="gov-flip-card-back">
+                            <div class="gov-desc">
+                                We’ll outline your use case in four dimensions:
+                                <ul>
+                                    <li>the purpose of data use</li>
+                                    <li>countries of interest</li>
+                                    <li>product types of interest</li>
+                                    <li>data elements needed</li>
+                                </ul>
+                                <br />This ensures we understand your needs clearly.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gov-arrow">&#8594;</div>
+
+                <div class="gov-flip-card gov-item">
+                    <div class="gov-flip-card-inner">
+                        <div class="gov-flip-card-front">
+                            <img src="~/site/images/gov_c.svg" alt="Governance Board">
+                            <div class="gov-title">Decision</div>
+                        </div>
+                        <div class="gov-flip-card-back">
+                            <div class="gov-desc">
+                                Our Data Governance Board will carefully review and decide on providing the data you need, guided by global and local guidelines.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gov-arrow">&#8594;</div>
+
+                <div class="gov-flip-card gov-item">
+                    <div class="gov-flip-card-inner">
+                        <div class="gov-flip-card-front">
+                            <img src="~/site/images/gov_d.svg" alt="Implementation">
+                            <div class="gov-title">Implementation</div>
+                        </div>
+                        <div class="gov-flip-card-back">
+                            <div class="gov-desc">
+                                Computational governance <br /><br /> We’ll ensure that only data from legitimate and relevant devices is routed to your use case, so you get exactly what you need in a legally compliant manner.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gov-footer">
+                <em><b>Hover over each step to learn more</b></em>&nbsp; - and contact us at&nbsp;<a href="mailto:idata.help@roche.com">idata.help@roche.com</a>&nbsp;to get started.
+            </div>
+        </div>
+
+        <div id="team" class="section">
+            <div class="slide">
+
+
+                <div class="team-circle-container">
+
+                    <div class="team-center-circle">
+                        <div class="team-name-role">
+                            <div class="team-name">Core team</div>
+                            <div class="team-role">Hover over pictures<br />to learn more</div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(0deg) translate(250px) rotate(0deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/alkesh.png');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Alkesh</div>
+                                    <div class="team-role">Architect</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(51.43deg) translate(250px) rotate(-51.43deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/andreas.png');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Andreas</div>
+                                    <div class="team-role">Domain Lead</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(102.86deg) translate(250px) rotate(-102.86deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/christian.png');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Christian</div>
+                                    <div class="team-role">iData Owner</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(154.29deg) translate(250px) rotate(-154.29deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/fauzan.png');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Faizan</div>
+                                    <div class="team-role">Tester</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(205.71deg) translate(250px) rotate(-205.71deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/gabi.jpg');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Gabi</div>
+                                    <div class="team-role">UI Developer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(257.14deg) translate(250px) rotate(-257.14deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/igor.png');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Igor</div>
+                                    <div class="team-role">Data Engineer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-flip-card" style="transform: rotate(308.57deg) translate(250px) rotate(-308.57deg);">
+                        <div class="team-flip-card-inner">
+                            <div class="team-flip-card-front" style="background-image: url('site/images/oleg.png');"></div>
+                            <div class="team-flip-card-back">
+                                <div class="team-name-role">
+                                    <div class="team-name">Oleg</div>
+                                    <div class="team-role">Developer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="slide">
+
+                <div id="extended-team" class="section">
+
+
+                    <div class="extended-team-circle-container">
+
+                        <div class="team-center-circle">
+                            <div class="team-name-role">
+                                <div class="team-name">Extended Team</div>
+                                <div class="team-role">Hover over pictures<br />to learn more</div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(0deg) translate(300px) rotate(0deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Sergei.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Sergei</div>
+                                        <div class="team-role">MIDM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(32.73deg) translate(300px) rotate(-32.73deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Urs.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Urs</div>
+                                        <div class="team-role">MIDM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(65.45deg) translate(300px) rotate(-65.45deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Cornelia.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Conny</div>
+                                        <div class="team-role">MIDM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(98.18deg) translate(300px) rotate(-98.18deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Stefan.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Stefan</div>
+                                        <div class="team-role">Cube</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(130.91deg) translate(300px) rotate(-130.91deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Lukas.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Lukas</div>
+                                        <div class="team-role">Cube</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(163.64deg) translate(300px) rotate(-163.64deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/TobiasL.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Tobi L.</div>
+                                        <div class="team-role">Cube</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(196.36deg) translate(300px) rotate(-196.36deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Sigi.jpg');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Sigi</div>
+                                        <div class="team-role">Cube</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(229.09deg) translate(300px) rotate(-229.09deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/TobiasK.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Tobi K.</div>
+                                        <div class="team-role">Cube</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(261.82deg) translate(300px) rotate(-261.82deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Lena.jpg');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Lena</div>
+                                        <div class="team-role">MIDM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(294.55deg) translate(300px) rotate(-294.55deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Wojciech.webp');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Wojciech</div>
+                                        <div class="team-role">MIDM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-flip-card extended" style="transform: rotate(327.27deg) translate(300px) rotate(-327.27deg);">
+                            <div class="team-flip-card-inner">
+                                <div class="team-flip-card-front extended" style="background-image: url('site/images/Dominik.jpg');"></div>
+                                <div class="team-flip-card-back extended">
+                                    <div class="team-name-role">
+                                        <div class="team-name">Dominik</div>
+                                        <div class="team-role">MIDM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        new fullpage('#fullpage', {
+            licenseKey: "M1UHH-NP63I-IGOIK-IMN38-VWQQL",
+            autoScrolling: true,
+            scrollHorizontally: true,
+            menu: '#menu',
+            anchors: ['1', '2', '3', '4'],
+            afterLoad: function (origin, destination, direction) {
+                if (destination.index === 0) {
+                    var video = document.getElementById('myVideo');
+                    video.currentTime = 0;
+                    video.play();
+                }
+
+                if (destination.index === 2) {
+                    var govItems = document.querySelectorAll('.gov-item, .gov-arrow');
+
+                    govItems.forEach(function (item, index) {
+                        item.style.opacity = '0';
+                        item.style.animation = 'none';
+                        void item.offsetWidth;
+                        item.style.animation = `fadeInUp 0.4s ease forwards ${0.1 + index * 0.4}s`;
+                    });
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

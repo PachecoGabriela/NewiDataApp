@@ -1,0 +1,120 @@
+﻿@page "/not-authorized-user-view"
+@using Microsoft.AspNetCore.Components
+@model iData.Blazor.Server.Pages.NotAuthorizedUserViewModel
+@inject NavigationManager Navigation
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>iData</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.26/fullpage.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.26/fullpage.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/site/css/shared.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/team.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/gov.css" />
+    <link rel="stylesheet" type="text/css" href="~/site/css/dps.css" />
+
+</head>
+
+<body>
+    <div id="fullpage" style="height: 100vh; display: flex; justify-content: center; align-items: flex-start; background-color: #f0f8ff; padding-top: 50px;">
+        <div id="dps" class="section" style="text-align: center; width: 100%;">
+            <div style="padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); margin: auto;">
+                <h5 class="alert-heading" style="font-size: 2em; font-weight: bold; color: #022366;">Access Denied</h5>
+                <p style="font-size: 2.0em; color: #666;">You do not have permission to perform this action.</p>
+                <hr style="margin: 20px 0;">
+                <p class="mb-0" style="font-size: 1.5em; color: #555;">Please contact the administrator if you believe this is an error.</p>
+                <button class="btn btn-primary"
+                        style="margin-top: 20px; padding: 10px 20px; font-size: 1.2em; background-color: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer;"
+                        onclick="window.location.href='/';">
+                    Go to main page
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!DOCTYPE html>
+
+    <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>iData</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.26/fullpage.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.26/fullpage.min.css" />
+
+        <link rel="stylesheet" type="text/css" href="~/site/css/shared.css" />
+        <link rel="stylesheet" type="text/css" href="~/site/css/home.css" />
+        <link rel="stylesheet" type="text/css" href="~/site/css/team.css" />
+        <link rel="stylesheet" type="text/css" href="~/site/css/gov.css" />
+        <link rel="stylesheet" type="text/css" href="~/site/css/dps.css" />
+
+    </head>
+
+    <body>
+        <div id="fullpage" style="height: 100vh; display: flex; justify-content: center; align-items: flex-start; background-color: #f0f8ff; padding-top: 50px;">
+            <div id="dps" class="section" style="text-align: center; width: 100%;">
+                <div style="padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); margin: auto;">
+                    <h5 class="alert-heading" style="font-size: 2em; font-weight: bold; color: #022366;">Access Denied</h5>
+                    <p style="font-size: 2.0em; color: #666;">You do not have permission to perform this action.</p>
+                    <hr style="margin: 20px 0;">
+                    <p class="mb-0" style="font-size: 1.5em; color: #555;">Please contact the administrator if you believe this is an error.</p>
+                    <button class="btn btn-primary"
+                            style="margin-top: 20px; padding: 10px 20px; font-size: 1.2em; background-color: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer;"
+                            onclick="window.location.href='/';">
+                        Go to main page
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            new fullpage('#fullpage', {
+                licenseKey: "M1UHH-NP63I-IGOIK-IMN38-VWQQL",
+                autoScrolling: true,
+                scrollHorizontally: true,
+                menu: '#menu',
+                anchors: ['1', '2', '3', '4'],
+                afterLoad: function (origin, destination, direction) {
+                    if (destination.index === 0) {
+                        var video = document.getElementById('myVideo');
+                        video.currentTime = 0;
+                        video.play();
+                    }
+
+                    if (destination.index === 2) {
+                        var govItems = document.querySelectorAll('.gov-item, .gov-arrow');
+
+                        govItems.forEach(function (item, index) {
+                            item.style.opacity = '0';
+                            item.style.animation = 'none';
+                            void item.offsetWidth;
+                            item.style.animation = `fadeInUp 0.4s ease forwards ${0.1 + index * 0.4}s`;
+                        });
+                    }
+                }
+            });
+
+        </script>
+
+    </body>
+
+</html>
+
+</body>
+
+</html>

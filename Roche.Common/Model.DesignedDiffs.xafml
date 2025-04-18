@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="23.2.5.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="AuditDataItemPersistentUTC_ListView">
+      <Columns>
+        <ColumnInfo Id="UserName" SortIndex="-1" SortOrder="None" Width="163" />
+        <ColumnInfo Id="ModifiedOn" SortIndex="0" SortOrder="Descending" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="BaseBO_ListView" AllowLink="False">
+      <Columns>
+        <ColumnInfo Id="UpdateUser" Index="0" />
+        <ColumnInfo Id="UpdateTimestamp" Index="1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>
